@@ -1,12 +1,12 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Restaurant } from './entities/restaurant.entity';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
 export class RestaurantResolver {
-  @Query((returns) => Restaurant)
-  myRestaurant() {
-    return true;
+  @Query((returns) => [Restaurant])
+  restaurants(@Args('veganOnly') veganOnly: boolean): Restaurant[] {
+    return [];
   }
   // @Query((returns) => Boolean) // graphql을 위한 return type
   // isPizzaGood(): Boolean {
