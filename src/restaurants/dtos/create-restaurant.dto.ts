@@ -1,16 +1,22 @@
-// data transfer object 역할
-
 import { ArgsType, Field } from '@nestjs/graphql';
+import { IsBoolean, IsString, Length } from 'class-validator';
 
-// @ArgsType()는 아래 Feild들을 분리된 argument로 정의할 수 있게 해준다.
 @ArgsType()
 export class CreateRestaurantDto {
   @Field((type) => String)
+  @IsString()
+  @Length(5, 10)
   name: string;
+
   @Field((type) => Boolean)
+  @IsBoolean()
   isVegan: boolean;
+
   @Field((type) => String)
+  @IsString()
   address: string;
+
   @Field((type) => String)
+  @IsString()
   ownersName: string;
 }
