@@ -1,3 +1,16 @@
 {
-  "vsicons.presets.nestjs": true
+  "vsicons.presets.nestjs": true,
+
+  "material-icon-theme.files.associations": {
+    "*.module.ts": "nest-module",
+    "*.service.ts": "nest-service",
+    "*.controller.ts": "nest-controller",
+    "*.gateway.ts": "nest-gateway",
+    "*.decorator.ts": "nest-decorator",
+    "*.filter.ts": "nest-filter",
+    "*.guard.ts": "nest-guard",
+    "*.middleware.ts": "nest-middleware",
+    "*.pipe.ts": "nest-pipe",
+    "*.resolver.ts": "nest-resolver"
+  }
 }
