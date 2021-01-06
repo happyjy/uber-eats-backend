@@ -10,14 +10,14 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: process.env.NODE_ENV === 'dev' ? '.dev.env' : '.test',
-      // validationSchema: Joi.object({
-      //   NODE_ENV: Joi.string().valid('dev', 'prod').required(),
-      //   DB_HOST: Joi.string().required,
-      //   DB_PORT: Joi.string().required,
-      //   DB_USERNAME: Joi.string().required,
-      //   DB_PASSWORD: Joi.string().required,
-      //   DB_DATABASE: Joi.string().required,
-      // }),
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string().valid('dev', 'prod').required(),
+        DB_HOST: Joi.string().required,
+        DB_PORT: Joi.string().required,
+        DB_USERNAME: Joi.string().required,
+        DB_PASSWORD: Joi.string().required,
+        DB_DATABASE: Joi.string().required,
+      }),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
