@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
+import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 import { Restaurant } from './entities/restaurant.entity';
 import { RestaurantService } from './restaurants.service';
 
@@ -17,7 +18,7 @@ export class RestaurantResolver {
   async createRestaurant(
     @Args('input') createRestaurantDto: CreateRestaurantDto,
   ): Promise<boolean> {
-    console.log(createRestaurantDto);
+    console.log('### createRestaurant:', createRestaurantDto);
     try {
       await this.restaurantService.createRestaurant(createRestaurantDto);
       return true;
@@ -26,6 +27,23 @@ export class RestaurantResolver {
       return false;
     }
     return true;
+  }
+
+  @Mutation((returns) => Boolean)
+  async updateRestaurant(
+    // # 'input' 설명
+    //  - dto에 @InputType을 사용했을때 사용하는 설정 방법이다.
+    //  - InputType이 아니라 @ArgsType() 사용할 경우 @Args()로 설정하면된다.
+    @Args('input') updateRestaurantDto: UpdateRestaurantDto,
+  ): Promise<boolean> {
+    console.log('### updateRestaurant', updateRestaurantDto);
+    try {
+      await this.restaurantService.updateRestaurant(updateRestaurantDto);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 
   // createRestaurant 변수로 들어가 @Args들을 Dto class를 만들어 보자 위 createRestaurant 확인
