@@ -9,6 +9,7 @@ export class RestaurantResolver {
   constructor(private readonly restaurantService: RestaurantService) {}
   @Query((returns) => [Restaurant])
   restaurants(): Promise<Restaurant[]> {
+    console.log(CreateRestaurantDto);
     return this.restaurantService.getAll();
   }
 

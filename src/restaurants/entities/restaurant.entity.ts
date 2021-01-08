@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsString, Length } from 'class-validator';
+import { IsBoolean, isBoolean, IsString, Length } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 /*
@@ -13,7 +13,6 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 // # @InputType 설정해야 dto에서 mappedType으로 사용될 수 있다.
 //  하지만 OmitType constructor 3번째 args에 변경하고 싶은 Type으로 변경 가능하다.
 // @InputType({ isAbstract: true })
-
 @ObjectType()
 @Entity()
 export class Restaurant {
@@ -27,23 +26,14 @@ export class Restaurant {
   @Length(5)
   name: string;
 
-  @Field((type) => Boolean)
-  @Column()
-  @IsString()
+  // @Field((type) => Boolean, { nullable: true })
+  @Field((type) => Boolean, { defaultValue: true })
+  @Column({ default: true })
+  @IsBoolean()
   isVegan: boolean;
 
-  @Field((type) => String)
+  @Field((type) => String, { defaultValue: '강남' })
   @Column()
   @IsString()
   address: string;
-
-  @Field((type) => String)
-  @Column()
-  @IsString()
-  ownersName: string;
-
-  @Field((type) => String)
-  @Column()
-  @IsString()
-  categoryName: string;
 }
