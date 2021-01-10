@@ -3,8 +3,11 @@ import * as Joi from 'joi'; // javascript module을 import 할때는 이런 식�
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RestaurantsModule } from './restaurants/restaurants.module';
-import { Restaurant } from './restaurants/entities/restaurant.entity';
+// import { RestaurantsModule } from './restaurants/restaurants.module';
+// import { Restaurant } from './restaurants/entities/restaurant.entity';
+import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -29,7 +32,7 @@ import { Restaurant } from './restaurants/entities/restaurant.entity';
       database: process.env.DB_DATABASE,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
-      entities: [Restaurant],
+      entities: [User /* Restaurant */],
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],
       // subscribers: ['src/subscriber/**/*.ts'],
@@ -38,7 +41,9 @@ import { Restaurant } from './restaurants/entities/restaurant.entity';
       autoSchemaFile: true, // 메모리에서 부터 스키마를 생성한다.
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
-    RestaurantsModule,
+    // RestaurantsModule,
+    CommonModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
