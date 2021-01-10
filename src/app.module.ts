@@ -10,6 +10,7 @@ import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
 
 @Module({
+  // server 관련 설정
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -23,6 +24,7 @@ import { CommonModule } from './common/common.module';
         DB_DATABASE: Joi.string().required,
       }),
     }),
+    // DB 관련 설정
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -37,6 +39,7 @@ import { CommonModule } from './common/common.module';
       // migrations: ['src/migration/**/*.ts'],
       // subscribers: ['src/subscriber/**/*.ts'],
     }),
+    // GrpahQL 관련 설정
     GraphQLModule.forRoot({
       autoSchemaFile: true, // 메모리에서 부터 스키마를 생성한다.
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
