@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
+import { JwtModule } from './jwt/jwt.module';
 
 @Module({
   // server 관련 설정
@@ -48,6 +49,7 @@ import { CommonModule } from './common/common.module';
     // RestaurantsModule,
     CommonModule,
     UsersModule,
+    JwtModule.forRoot(),
   ],
   controllers: [],
   providers: [],
