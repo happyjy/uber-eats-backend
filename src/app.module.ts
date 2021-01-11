@@ -15,15 +15,16 @@ import { JwtModule } from './jwt/jwt.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: process.env.NODE_ENV === 'dev' ? '.dev.env' : '.test',
+      envFilePath: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.test',
+      ignoreEnvFile: process.env.NODE_ENV === 'prod',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().valid('dev', 'prod').required(),
-        DB_HOST: Joi.string().required,
-        DB_PORT: Joi.string().required,
-        DB_USERNAME: Joi.string().required,
-        DB_PASSWORD: Joi.string().required,
-        DB_NAME: Joi.string().required,
-        SECRET_KEY: Joi.string().required,
+        DB_HOST: Joi.string().required(),
+        DB_PORT: Joi.string().required(),
+        DB_USERNAME: Joi.string().required(),
+        DB_PASSWORD: Joi.string().required(),
+        DB_NAME: Joi.string().required(),
+        PRIVATE_KEY: Joi.string().required(),
       }),
     }),
     // DB 관련 설정
@@ -35,7 +36,7 @@ import { JwtModule } from './jwt/jwt.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
-      logging: true,
+      logging: process.env.NODE_ENV !== 'prod',
       entities: [User /* Restaurant */],
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],
@@ -49,7 +50,9 @@ import { JwtModule } from './jwt/jwt.module';
     // RestaurantsModule,
     CommonModule,
     UsersModule,
-    JwtModule.forRoot(),
+    JwtModule.forRoot({
+      privateKey: process.env.PRIVATE_KEY,
+    }),
   ],
   controllers: [],
   providers: [],
