@@ -21,7 +21,8 @@ import { CommonModule } from './common/common.module';
         DB_PORT: Joi.string().required,
         DB_USERNAME: Joi.string().required,
         DB_PASSWORD: Joi.string().required,
-        DB_DATABASE: Joi.string().required,
+        DB_NAME: Joi.string().required,
+        SECRET_KEY: Joi.string().required,
       }),
     }),
     // DB 관련 설정
@@ -31,7 +32,7 @@ import { CommonModule } from './common/common.module';
       port: +process.env.DB_PORT,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
       entities: [User /* Restaurant */],

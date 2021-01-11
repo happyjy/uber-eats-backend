@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { boolean } from 'joi';
+import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
+import * as jwt from 'jsonwebtoken';
 import { CreateAccountInput } from './dtos/create-account.dto';
 import { LoginInput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
@@ -10,7 +11,11 @@ import { User } from './entities/user.entity';
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
-  ) {}
+    private readonly config: ConfigService,
+  ) {
+    console.log('### this.config.get: ', this.config.get);
+    console.log('### SECRET_KEY: ', this.config.get('SECRET_KEY'));
+  }
 
   async createAccount({
     email,
@@ -43,6 +48,8 @@ export class UserService {
           error: 'User not found',
         };
       }
+      // user: user.entity.ts의 class 인스턴스
+      console.log('### userService > login > user: ', user);
       const passwordCorrect = await user.checkPassword(password);
       if (!passwordCorrect) {
         return {
@@ -50,6 +57,7 @@ export class UserService {
           error: 'Wrong password',
         };
       }
+      const token = jwt.sign({ id: user.id }, this.config.get('SECRET_KEY'));
       return {
         ok: true,
         token: 'lalalalaalala',
