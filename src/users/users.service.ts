@@ -15,9 +15,13 @@ export class UserService {
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
   ) {
-    console.log('### this.config.get: ', this.config.get);
-    console.log('### SECRET_KEY: ', this.config.get('SECRET_KEY'));
-    console.log('### SECRET_KEY: ', process.env.SECRET_KEY);
+    // console.log('### UserService > this: ', this);
+    // console.log('### UserService > this.config.get: ', this.config.get);
+    console.log(
+      '### UserService > SECRET_KEY: ',
+      this.config.get('SECRET_KEY'),
+    );
+    console.log('### UserService > SECRET_KEY: ', process.env.SECRET_KEY);
 
     this.jwtService.hello();
   }
@@ -63,10 +67,15 @@ export class UserService {
         };
       }
       // const token = jwt.sign({ id: user.id }, this.config.get('SECRET_KEY'));
-      const token = jwt.sign(
-        { id: user.id },
-        'yeGLi26PYml2LpKKOCQmoh4glKBKmCFw',
-      );
+      // # token: userid를 통해서 jwt token으로 사용자 정보를 갖게 한다.
+      // const token = jwt.sign(
+      //   { id: user.id },
+      //   'yeGLi26PYml2LpKKOCQmoh4glKBKmCFw',
+      // );
+
+      const token = this.jwtService.sign(user.id);
+
+      console.log('### userService > login > token: ', token);
       return {
         ok: true,
         token,
