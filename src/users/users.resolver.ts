@@ -50,4 +50,7 @@ export class UserResolver {
       };
     }
   }
+
+  @Query((reutrns) => User)
+  me() {}
 }

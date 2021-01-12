@@ -1,10 +1,16 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import * as Joi from 'joi'; // javascript module을 import 할때는 이런 식으로 한다.
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import { RestaurantsModule } from './restaurants/restaurants.module';
 // import { Restaurant } from './restaurants/entities/restaurant.entity';
+import { JwtMiddleware } from './jwt/jwt.middleware';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
@@ -59,3 +65,14 @@ import { JwtModule } from './jwt/jwt.module';
   providers: [],
 })
 export class AppModule {}
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//      //consumer.apply(JwtMiddleware).exclude: 특정 요청 제외 적용시 사용
+//     consumer.apply(JwtMiddleware).forRoutes({
+//       // path: middleware 수행할 request 요청 받을 패턴
+//       // method: middleware 수행할 req 요청 방식
+//       path: '/graphql',  // *: 모든 route 적용
+//       method: RequestMethod.POST, // RequestMethod.ALL: 모든 요청 방식
+//     });
+//   }
+// }
