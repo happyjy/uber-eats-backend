@@ -15,7 +15,6 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
-
 @Module({
   // server 관련 설정
   imports: [
@@ -54,13 +53,14 @@ import { JwtModule } from './jwt/jwt.module';
       context: ({ req }) => ({ user: req['user'] }),
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
-    // RestaurantsModule,
-    CommonModule,
-    UsersModule,
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
       test: 'abc',
     }),
+    // RestaurantsModule,
+    UsersModule,
+    // AuthModule,
+    // CommonModule,
   ],
   controllers: [],
   providers: [],
