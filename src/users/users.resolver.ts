@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { ok } from 'assert';
 import {
   CreateAccountInput,
@@ -52,5 +52,12 @@ export class UserResolver {
   }
 
   @Query((reutrns) => User)
-  me() {}
+  me(@Context() context) {
+    if (!context.user) {
+      return;
+    } else {
+      console.log('### userResolver > me > context: ', context);
+      return context.user;
+    }
+  }
 }

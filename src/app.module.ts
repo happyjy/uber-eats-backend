@@ -51,6 +51,7 @@ import { JwtModule } from './jwt/jwt.module';
     // GrpahQL 관련 설정
     GraphQLModule.forRoot({
       autoSchemaFile: true, // 메모리에서 부터 스키마를 생성한다.
+      context: ({ req }) => ({ user: req['user'] }),
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
     // RestaurantsModule,
@@ -68,7 +69,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(JwtMiddleware)
-      .forRoutes({ path: '/graphql', method: RequestMethod.ALL });
+      .forRoutes({ path: '/graphql', method: RequestMethod.POST });
   }
 }
 // export class AppModule implements NestModule {

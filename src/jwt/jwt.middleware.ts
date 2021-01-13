@@ -28,6 +28,7 @@ export class JwtMiddleware implements NestMiddleware {
         try {
           const user = await this.userService.findById(decoded['id']);
           console.log('### jwt middleware > use: ', user);
+          // # graphql context에서 resolver에서 공유 가능
           req['user'] = user;
           req['test'] = 'requestSetting';
         } catch (e) {}
