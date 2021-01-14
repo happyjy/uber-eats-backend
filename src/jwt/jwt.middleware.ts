@@ -34,5 +34,8 @@ export class JwtMiddleware implements NestMiddleware {
         }
       } catch (e) {}
     }
+    // # next()수행하지 않으면 아래와 같은 에러 남.
+    //  GraphQL playground에 Server cannot be reached, Faild to fetch schema. Please check your connection
+    next(); // resolver 이전 middelWare에서 작업 처리후 resolver로 도달하게 해주는 function
   }
 }
