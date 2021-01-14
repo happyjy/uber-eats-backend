@@ -13,8 +13,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtMiddleware } from './jwt/jwt.middleware';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
-import { CommonModule } from './common/common.module';
+// import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
+// import { AuthModule } from './auth/auth.module';
 @Module({
   // server 관련 설정
   imports: [

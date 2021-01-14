@@ -22,17 +22,17 @@ export class JwtMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     if ('x-jwt' in req.headers) {
       const token = req.headers['x-jwt'];
-      //sign 한것을 이곳에서 decoded
-      const decoded = this.jwtService.verify(token.toString());
-      if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
-        try {
+      try {
+        //sign 한것을 이곳에서 decoded
+        const decoded = this.jwtService.verify(token.toString());
+        if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
           const user = await this.userService.findById(decoded['id']);
           console.log('### jwt middleware > use: ', user);
           // # graphql context에서 resolver에서 공유 가능
           req['user'] = user;
           req['test'] = 'requestSetting';
-        } catch (e) {}
-      }
+        }
+      } catch (e) {}
     }
   }
 }
