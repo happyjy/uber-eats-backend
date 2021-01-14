@@ -7,6 +7,7 @@ import { CreateAccountInput } from './dtos/create-account.dto';
 import { LoginInput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
 import { JwtService } from 'src/jwt/jwt.service';
+import { EditProfileInput } from './dtos/edit-profile.dto';
 
 @Injectable()
 export class UserService {
@@ -72,7 +73,6 @@ export class UserService {
       //   { id: user.id },
       //   'yeGLi26PYml2LpKKOCQmoh4glKBKmCFw',
       // );
-
       const token = this.jwtService.sign(user.id);
 
       console.log('### userService > login > token: ', token);
@@ -90,5 +90,9 @@ export class UserService {
 
   async findById(id: number): Promise<User> {
     return this.users.findOne({ id });
+  }
+
+  async editProfile(userId: number, { email, password }: EditProfileInput) {
+    return this.users.update(userId, { email, password });
   }
 }
