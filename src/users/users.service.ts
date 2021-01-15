@@ -92,8 +92,21 @@ export class UserService {
     return this.users.findOne({ id });
   }
 
-  async editProfile(userId: number, editProfileInput: EditProfileInput) {
-    console.log('### :', editProfileInput);
-    return this.users.update(userId, { ...editProfileInput });
+  async editProfile(
+    userId: number,
+    { email, password }: EditProfileInput,
+  ): Promise<User> {
+    const user = await this.users.findOne(userId);
+
+    if (email) {
+      user.email = email;
+    }
+    if (password) {
+      user.password = password;
+    }
+    // upate: csascade하지 않고 해당 entity에만 저장한다/ entity여부를 확인하지 않는다.
+    //      db에 query만 보내서 user entity의 beforeUpdate로 decorator한 hashPassword 함수가 수행되지 않는다.
+    // save: 주어진 entity가 있으면 update, 없으면 save
+    return this.users.save(user);
   }
 }

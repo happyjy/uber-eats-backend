@@ -68,6 +68,7 @@ import { JwtModule } from './jwt/jwt.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    // client에서 forRoutes에 설정으로 request 보낼시 apply에 설정된 middleware execute
     consumer
       .apply(JwtMiddleware)
       .forRoutes({ path: '/graphql', method: RequestMethod.POST });

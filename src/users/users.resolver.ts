@@ -45,7 +45,10 @@ export class UserResolver {
 
   @Mutation((returns) => LoginOutput)
   async login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
-    console.log(`### loginInput: ${LoginInput}`);
+    console.log(`### UserResolver > login > loginInput: `, {
+      email: loginInput.email,
+      password: loginInput.password,
+    });
     try {
       const { ok, error, token } = await this.usersService.login(loginInput);
       return { ok, error, token };
@@ -93,6 +96,7 @@ export class UserResolver {
   ): Promise<EditProfileOutput> {
     try {
       await this.usersService.editProfile(AuthUser.id, editProfileInput);
+
       return {
         ok: true,
       };
