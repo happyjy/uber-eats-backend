@@ -14,8 +14,10 @@ export class JwtService {
     console.log('hello');
   }
   sign(userId: number): string {
+    // # env에 있는 privatekey 넘겨 받는 방법 2가지
+    // 1. app.module에 jwt.module.forRoot 설정으로 env에 있는 private_key를 받는다.
+    // 2. ConfigService 객체(@nestjs/config모듈)의 get 함수로 private_key를 받는다.
     console.log('### JwtService > sign > this.options: ', this.options);
-    // configService에서 privateKey 값을 가지고 올 수 있다.
     console.log(
       '### JwtService > sign > this.configService.get(PRIVATE_KEY)',
       this.configService.get('PRIVATE_KEY'),
