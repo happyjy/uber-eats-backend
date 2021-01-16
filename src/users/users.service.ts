@@ -61,13 +61,21 @@ export class UserService {
   }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
     // make a JWT and give it to the user
     try {
-      const user = await this.users.findOne({ email });
+      // # user.entity.ts에 password column 설정으로
+      //    select: false를 주면 findOne반환 값에 포함되지 않는다.
+      const user = await this.users.findOne(
+        { email },
+        { select: ['password'] },
+      );
+      console.log('### user: ', user);
+
       if (!user) {
         return {
           ok: false,
           error: 'User not found',
         };
       }
+
       // user: user.entity.ts의 class 인스턴스
       console.log('### userService > login > user: ', user);
       const passwordCorrect = await user.checkPassword(password);
@@ -123,19 +131,24 @@ export class UserService {
   }
 
   async verifyEmail(code: string): Promise<boolean> {
-    const verification = await this.verifications.findOne(
-      { code },
-      { relations: ['user'] },
-    );
-    if (verification) {
-      console.log(
-        '### userService: > verifyEmail > verification: ',
-        verification,
+    try {
+      const verification = await this.verifications.findOne(
+        { code },
+        { relations: ['user'] }, // relation관계로 설정된 user 정보도 join해서 결과로 반환
       );
 
-      verification.user.verified = true;
-      this.users.save(verification.user);
+      if (verification) {
+        console.log(
+          '### userService: > verifyEmail > verification.user: ',
+          verification.user,
+        );
 
+        verification.user.verified = true;
+        this.users.save(verification.user);
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
