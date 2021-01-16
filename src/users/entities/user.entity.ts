@@ -36,6 +36,10 @@ export class User extends CoreEntity {
   @IsEnum(UserRole)
   role: UserRole;
 
+  @Column({ default: false })
+  @Field((type) => Boolean)
+  verified: boolean;
+
   // DB inser, update시 먼저 수행되는 함수
   @BeforeInsert()
   @BeforeUpdate()

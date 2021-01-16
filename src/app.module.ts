@@ -15,6 +15,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 // import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
+import { Verification } from './users/entities/verification.entity';
 // import { AuthModule } from './auth/auth.module';
 @Module({
   // server 관련 설정
@@ -43,7 +44,7 @@ import { JwtModule } from './jwt/jwt.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV !== 'prod',
-      entities: [User /* Restaurant */],
+      entities: [/* Restaurant, */ User, Verification], // table 생성 설정`
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],
       // subscribers: ['src/subscriber/**/*.ts'],
