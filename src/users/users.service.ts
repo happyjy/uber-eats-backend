@@ -121,4 +121,22 @@ export class UserService {
     // save: 주어진 entity가 있으면 update, 없으면 save
     return this.users.save(user);
   }
+
+  async verifyEmail(code: string): Promise<boolean> {
+    const verification = await this.verifications.findOne(
+      { code },
+      { relations: ['user'] },
+    );
+    if (verification) {
+      console.log(
+        '### userService: > verifyEmail > verification: ',
+        verification,
+      );
+
+      verification.user.verified = true;
+      this.users.save(verification.user);
+
+      return false;
+    }
+  }
 }
