@@ -27,8 +27,10 @@ export class User extends CoreEntity {
   @IsEmail()
   email: string;
 
+  // resolver me 요청시 반환값중에 Column이 select false라 조회되지 않는 컬럼이라
+  // Feild에 nullable true 설정으로 graphql query req시 에러나지 않도록 수정
   @Column({ select: false }) // 조회 select에서 빠지도록
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   password: string;
 
   @Column({ type: 'enum', enum: UserRole })

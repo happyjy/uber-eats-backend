@@ -5,10 +5,15 @@ import { Repository } from 'typeorm';
 import * as jwt from 'jsonwebtoken';
 import { User } from './entities/user.entity';
 import { Verification } from './entities/verification.entity';
-import { CreateAccountInput } from './dtos/create-account.dto';
-import { LoginInput } from './dtos/login.dto';
-import { EditProfileInput } from './dtos/edit-profile.dto';
+import {
+  CreateAccountInput,
+  CreateAccountOutput,
+} from './dtos/create-account.dto';
+import { LoginInput, LoginOutput } from './dtos/login.dto';
+import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { JwtService } from 'src/jwt/jwt.service';
+import { UserProfileOutput } from './dtos/user-profile.dto';
+import { VerifyEmailOutput } from './dtos/verify-email.dto';
 
 @Injectable()
 export class UserService {
@@ -34,7 +39,7 @@ export class UserService {
     email,
     password,
     role,
-  }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
+  }: CreateAccountInput): Promise<CreateAccountOutput> {
     try {
       const exists = await this.users.findOne({ email });
       if (exists) {
@@ -55,19 +60,17 @@ export class UserService {
     }
   }
 
-  async login({
-    email,
-    password,
-  }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
+  async login({ email, password }: LoginInput): Promise<LoginOutput> {
     // make a JWT and give it to the user
     try {
       // # user.entity.ts에 password column 설정으로
       //    select: false를 주면 findOne반환 값에 포함되지 않는다.
       const user = await this.users.findOne(
         { email },
-        { select: ['password'] },
+        { select: ['id', 'password'] },
       );
-      console.log('### user: ', user);
+      // user: user.entity.ts의 class 인스턴스
+      console.log('### userService > login > user: ', user);
 
       if (!user) {
         return {
@@ -76,8 +79,6 @@ export class UserService {
         };
       }
 
-      // user: user.entity.ts의 class 인스턴스
-      console.log('### userService > login > user: ', user);
       const passwordCorrect = await user.checkPassword(password);
       if (!passwordCorrect) {
         return {
@@ -92,8 +93,11 @@ export class UserService {
       //   'yeGLi26PYml2LpKKOCQmoh4glKBKmCFw',
       // );
       const token = this.jwtService.sign(user.id);
+      console.log('### userService > login > id, token: ', {
+        id: user.id,
+        token,
+      });
 
-      console.log('### userService > login > token: ', token);
       return {
         ok: true,
         token,
@@ -106,31 +110,48 @@ export class UserService {
     }
   }
 
-  async findById(id: number): Promise<User> {
-    return this.users.findOne({ id });
+  async findById(id: number): Promise<UserProfileOutput> {
+    try {
+      const user = await this.users.findOne({ id });
+      if (user) {
+        return {
+          ok: true,
+          user,
+        };
+      }
+    } catch (error) {
+      return { ok: false, error: 'User Not Found' };
+    }
   }
 
   async editProfile(
     userId: number,
     { email, password }: EditProfileInput,
-  ): Promise<User> {
-    const user = await this.users.findOne(userId);
+  ): Promise<EditProfileOutput> {
+    try {
+      const user = await this.users.findOne(userId);
 
-    if (email) {
-      user.email = email;
-      user.verified = false;
-      await this.verifications.save(this.verifications.create({ user }));
+      if (email) {
+        user.email = email;
+        user.verified = false;
+
+        await this.verifications.save(this.verifications.create({ user }));
+      }
+
+      if (password) {
+        user.password = password;
+      }
+
+      // upate: csascade하지 않고 해당 entity에만 저장한다/ entity여부를 확인하지 않는다.
+      //      db에 query만 보내서 user entity의 beforeUpdate로 decorator한 hashPassword 함수가 수행되지 않는다.
+      // save: 주어진 entity가 있으면 update, 없으면 save
+      await this.users.save(user);
+    } catch (error) {
+      return { ok: false, error: 'Could not update profile.' };
     }
-    if (password) {
-      user.password = password;
-    }
-    // upate: csascade하지 않고 해당 entity에만 저장한다/ entity여부를 확인하지 않는다.
-    //      db에 query만 보내서 user entity의 beforeUpdate로 decorator한 hashPassword 함수가 수행되지 않는다.
-    // save: 주어진 entity가 있으면 update, 없으면 save
-    return this.users.save(user);
   }
 
-  async verifyEmail(code: string): Promise<boolean> {
+  async verifyEmail(code: string): Promise<VerifyEmailOutput> {
     try {
       const verification = await this.verifications.findOne(
         { code },
@@ -145,11 +166,12 @@ export class UserService {
 
         verification.user.verified = true;
         this.users.save(verification.user);
-        return true;
+        return { ok: true };
       }
+      return { ok: false, error: 'Verification not Found.' };
     } catch (error) {
       console.log(error);
-      return false;
+      return { ok: false, error };
     }
   }
 }

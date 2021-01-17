@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     // gqlContext == app.module.ts의 GraphQLModule의 context 설정
     const gqlContext = GqlExecutionContext.create(context).getContext();
     const user = gqlContext['user'];
-    console.log('### AuthGuard decorator > gqlContext: ', gqlContext.user);
+    console.log('### AuthGuard decorator > user: ', user);
     if (!user) {
       return false;
     } else {
