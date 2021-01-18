@@ -22,19 +22,19 @@ export class UserService {
     @InjectRepository(User) private readonly users: Repository<User>,
     @InjectRepository(Verification)
     private readonly verifications: Repository<Verification>,
-    private readonly config: ConfigService,
+    // private readonly config: ConfigService,
     private readonly jwtService: JwtService,
     private readonly mailService: MailService,
   ) {
     // console.log('### UserService > this: ', this);
     // console.log('### UserService > this.config.get: ', this.config.get);
-    console.log(
-      '### UserService > SECRET_KEY: ',
-      this.config.get('SECRET_KEY'),
-    );
+    // console.log(
+    //   '### UserService > SECRET_KEY: ',
+    //   this.config.get('SECRET_KEY'),
+    // );
     console.log('### UserService > SECRET_KEY: ', process.env.SECRET_KEY);
 
-    this.jwtService.hello();
+    // this.jwtService.hello();
   }
 
   async createAccount({

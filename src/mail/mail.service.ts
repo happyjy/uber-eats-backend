@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import * as FormData from 'form-data';
-import got from 'got/dist/source';
+import got from 'got';
 import { CONFIG_OPTIONS } from 'src/common/common.constant';
 import { EmailVar, MailModuleOptions } from './mail.interfaces';
 
@@ -32,15 +32,15 @@ export class MailService {
     console.log('### mailService: ', emailVars);
     emailVars.forEach((eVar) => form.append(`v:${eVar.key}`, eVar.value));
     try {
-      await got(`https://api.mailgun.net/v3/${this.options.domain}/messages`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Basic ${Buffer.from(
-            `api:${this.options.apiKey}`,
-          ).toString('base64')}`,
-        },
-        body: form,
-      });
+      // await got(`https://api.mailgun.net/v3/${this.options.domain}/messages`, {
+      //   method: 'POST',
+      //   headers: {
+      //     Authorization: `Basic ${Buffer.from(
+      //       `api:${this.options.apiKey}`,
+      //     ).toString('base64')}`,
+      //   },
+      //   body: form,
+      // });
     } catch (error) {
       console.log(error);
     }
