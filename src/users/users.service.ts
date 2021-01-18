@@ -14,6 +14,7 @@ import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { JwtService } from 'src/jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { VerifyEmailOutput } from './dtos/verify-email.dto';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class UserService {
@@ -23,6 +24,7 @@ export class UserService {
     private readonly verifications: Repository<Verification>,
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {
     // console.log('### UserService > this: ', this);
     // console.log('### UserService > this.config.get: ', this.config.get);
@@ -49,11 +51,13 @@ export class UserService {
       const user = await this.users.save(
         this.users.create({ email, password, role }),
       );
-      await this.verifications.save(
+      const verification = await this.verifications.save(
         this.verifications.create({
           user,
         }),
       );
+
+      this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (e) {
       return { ok: false, error: "Couldn't create account" };
@@ -135,7 +139,10 @@ export class UserService {
         user.email = email;
         user.verified = false;
 
-        await this.verifications.save(this.verifications.create({ user }));
+        const verification = await this.verifications.save(
+          this.verifications.create({ user }),
+        );
+        this.mailService.sendVerificationEmail(user.email, verification.code);
       }
 
       if (password) {
@@ -146,6 +153,10 @@ export class UserService {
       //      db에 query만 보내서 user entity의 beforeUpdate로 decorator한 hashPassword 함수가 수행되지 않는다.
       // save: 주어진 entity가 있으면 update, 없으면 save
       await this.users.save(user);
+
+      return {
+        ok: true,
+      };
     } catch (error) {
       return { ok: false, error: 'Could not update profile.' };
     }

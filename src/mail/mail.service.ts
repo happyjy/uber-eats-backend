@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as FormData from 'form-data';
 import got from 'got/dist/source';
 import { CONFIG_OPTIONS } from 'src/common/common.constant';
-import { MailModuleOptions } from './mail.interfaces';
+import { EmailVar, MailModuleOptions } from './mail.interfaces';
 
 @Injectable()
 export class MailService {
@@ -10,23 +10,29 @@ export class MailService {
     @Inject(CONFIG_OPTIONS) private readonly options: MailModuleOptions,
   ) {
     console.log('### MailService > options: ', options);
-    this.sendEmail('testing', 'test');
+    // this.sendEmail('testing', 'test');
   }
 
-  private async sendEmail(subject: string, content: string) {
+  private async sendEmail(
+    subject: string,
+    template: string,
+    emailVars: EmailVar[],
+  ) {
     // mailgun api curl 설정
     const form = new FormData();
-    form.append('from', `Excited User <mailgun@${this.options.domain}>`);
+
+    form.append(
+      'from',
+      `Nico from Nuber Eats <mailgun@${this.options.domain}>`,
+    );
     form.append('to', `okwoyjy@gmail.com`);
     form.append('subject', subject);
-    form.append('template', 'verify-email');
-    form.append('v:code', 'confirmTestStringCodeee');
-    form.append('v:username', 'YOON!!!');
+    form.append('template', template);
 
-    // mailgun으로 계속 req보내면 차단당한다는 얘기로 주석처리함.
-    const response = await got(
-      `https://api.mailgun.net/v3/${this.options.domain}/messages`,
-      {
+    console.log('### mailService: ', emailVars);
+    emailVars.forEach((eVar) => form.append(`v:${eVar.key}`, eVar.value));
+    try {
+      await got(`https://api.mailgun.net/v3/${this.options.domain}/messages`, {
         method: 'POST',
         headers: {
           Authorization: `Basic ${Buffer.from(
@@ -34,8 +40,16 @@ export class MailService {
           ).toString('base64')}`,
         },
         body: form,
-      },
-    );
-    console.log('### MailService: ', response.body);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  sendVerificationEmail(email: string, code: string) {
+    this.sendEmail('Verify Your Email', 'verify-email', [
+      { key: 'code', value: code },
+      { key: 'username', value: email },
+    ]);
   }
 }

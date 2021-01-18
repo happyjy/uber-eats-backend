@@ -53,6 +53,7 @@ export class UserResolver {
   }
 
   @Mutation((returns) => EditProfileOutput)
+  @UseGuards(AuthGuard)
   async editProfile(
     @AuthUser() authUser: User,
     @Args('input') editProfileInput: EditProfileInput,
