@@ -26,7 +26,7 @@ const mockRepository = () => ({
 });
 
 const mockJwtService = {
-  sign: jest.fn(),
+  sign: jest.fn(() => 'fake-signed-token'),
   verify: jest.fn(),
 };
 
@@ -44,8 +44,9 @@ describe('UserService', () => {
   let usersRepository: MockRepository<User>;
   let verificationsRepository: MockRepository<Verification>;
   let mailService: MailService;
+  let jwtService: JwtService;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
         UserService,
@@ -105,7 +106,7 @@ describe('UserService', () => {
       // # 분석: usersRepository.create.mockReturnValue(createAccountArgs);
       //  - usersRepository.create의 return value 값은 아래 코드1의 "createAccountArgs" 값과 같아야 success!
       //  - 코드1: expect(usersRepository.save).toHaveBeenCalledWith(createAccountArgs)
-      console.log(`#1: , ${userFindOne}/ ${userFindOne()}`); //userFindOne() promise 객체 반환
+      console.log(`#1: , ${userFindOne}/// ${userFindOne()}`); //userFindOne() promise 객체 반환
       userFindOne().then(
         (result) => console.log('promise > result: ', result),
         (error) => console.log('promise > result: ', error),
@@ -150,6 +151,36 @@ describe('UserService', () => {
         expect.any(String),
       );
       expect(result).toEqual({ ok: true });
+    });
+
+    it('should fail on exceptions', async () => {
+      usersRepository.findOne.mockRejectedValue(new Error());
+      const result = await service.createAccount(createAccountArgs);
+      expect(result).toEqual({ ok: false, error: "Couldn't create account" });
+    });
+  });
+
+  describe('login', () => {
+    const loginArgs = {
+      email: 'bs@gmail.com',
+      password: 'bs.pw',
+    };
+
+    it('should fail if user does not exist', async () => {
+      usersRepository.findOne.mockResolvedValue(null);
+
+      const result = await service.login(loginArgs);
+
+      expect(usersRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(usersRepository.findOne).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      );
+
+      expect(result).toEqual({
+        ok: false,
+        error: 'User not found',
+      });
     });
   });
 
