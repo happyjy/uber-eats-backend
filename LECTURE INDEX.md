@@ -6,91 +6,91 @@ LECTURE INDEX
 0.7 This Course Structure
 
 1 GRAPHQL API
-1.0 Apollo Server Setup
-1.1 Our First Resolver
-1.2 ObjectType
-1.3 Arguments
-1.4 InputTypes and ArgumentTypes
-1.5 Validating ArgsTypes
+[x] 1.0 Apollo Server Setup
+[x] 1.1 Our First Resolver
+[x] 1.2 ObjectType
+[x] 1.3 Arguments
+[x] 1.4 InputTypes and ArgumentTypes
+[x] 1.5 Validating ArgsTypes
 
 2 DATABASE CONFIGURATION
-2.0 TypeORM and PostgreSQL
-2.1 MacOS Setup
-2.2 Windows Setup
-2.3 TypeORM Setup
-2.4 Introducing ConfigService
-2.5 Configuring ConfigService
-2.6 Validating ConfigService
+[x] 2.0 TypeORM and PostgreSQL
+[x] 2.1 MacOS Setup
+[x] 2.2 Windows Setup
+[x] 2.3 TypeORM Setup
+[x] 2.4 Introducing ConfigService
+[x] 2.5 Configuring ConfigService
+[x] 2.6 Validating ConfigService
 
 3 TYPEORM AND NEST
-[ ] 3.0 Our First Entity
-[ ] 3.1 Data Mapper vs Active Record
-[ ] 3.2 Injecting The Repository
-[ ] 3.3 Recap
-[ ] 3.4 Create Restaurant
-[ ] 3.5 Mapped Types
-[ ] 3.6 Optional Types and Columns
-[ ] 3.7 Update Restaurant part One
-[ ] 3.8 Update Restaurant part Two
+[x] 3.0 Our First Entity
+[x] 3.1 Data Mapper vs Active Record
+[x] 3.2 Injecting The Repository
+[x] 3.3 Recap
+[x] 3.4 Create Restaurant
+[x] 3.5 Mapped Types
+[x] 3.6 Optional Types and Columns
+[x] 3.7 Update Restaurant part One
+[x] 3.8 Update Restaurant part Two
 
 4 USER CRUD
-4.0 User Module Introduction
-4.1 User Model
-4.2 User Resolver and Service
-4.3 Create Account Mutation part One
-4.4 Create Account Mutation part Two
-4.5 Create Account Mutation part Three
-4.6 An Alternative Error
-4.7 Hashing Passwords
-4.8 Log In part One
-4.9 Log In part Two
+[x] 4.0 User Module Introduction
+[x] 4.1 User Model
+[x] 4.2 User Resolver and Service
+[x] 4.3 Create Account Mutation part One
+[x] 4.4 Create Account Mutation part Two
+[x] 4.5 Create Account Mutation part Three
+[x] 4.6 An Alternative Error
+[x] 4.7 Hashing Passwords
+[x] 4.8 Log In part One
+[x] 4.9 Log In part Two
 
 5 USER AUTHENTICATION
-5.0 Introduction to Authentication
-5.1 Generating JWT
-5.2 JWT and Modules
-5.3 JWT Module part One
-5.4 JWT Module part Two
-5.5 JWT Module part Three
-5.6 Middlewares in NestJS
-5.7 JWT Middleware
-5.8 GraphQL Context
-5.9 AuthGuard
-5.10 AuthUser Decorator
-5.11 Recap
-5.12 userProfile Mutation
-5.13 updateProfile part One
-5.14 updateProfile part Two
-5.15 updateProfile part Three
-5.16 Recap
+[x] 5.0 Introduction to Authentication
+[x] 5.1 Generating JWT
+[x] 5.2 JWT and Modules
+[x] 5.3 JWT Module part One
+[x] 5.4 JWT Module part Two
+[x] 5.5 JWT Module part Three
+[x] 5.6 Middlewares in NestJS
+[x] 5.7 JWT Middleware
+[x] 5.8 GraphQL Context
+[x] 5.9 AuthGuard
+[x] 5.10 AuthUser Decorator
+[x] 5.11 Recap
+[x] 5.12 userProfile Mutation
+[x] 5.13 updateProfile part One
+[x] 5.14 updateProfile part Two
+[x] 5.15 updateProfile part Three
+[x] 5.16 Recap
 
 6 EMAIL VERIFICATION
-6.0 Verification Entity
-6.1 Creating Verifications
-6.2 Verifying User part One
-6.3 Verifying User part Two
-6.4 Cleaning the Code
-6.5 Mailgun Setup
-6.6 Mail Module Setup
-6.7 Mailgun API
-6.8 Beautiful Emails
-6.9 Refactor
+[x] 6.0 Verification Entity
+[x] 6.1 Creating Verifications
+[x] 6.2 Verifying User part One
+[x] 6.3 Verifying User part Two
+[x] 6.4 Cleaning the Code
+[x] 6.5 Mailgun Setup
+[x] 6.6 Mail Module Setup
+[x] 6.7 Mailgun API
+[x] 6.8 Beautiful Emails
+[x] 6.9 Refactor
 
 7 UNIT TESTING THE USER SERVICE
-7.0 Setting Up Tests
-7.1 Mocking
-7.2 Mocking part Two
-7.3 Writing Our First Test
-7.4 Recap
-7.5 createAccount Test part One
-7.6 createAccount Test part Two
-7.7 login Test part One
-7.8 login Test part Two
-7.9 findById Test
-7.10 editProfile Test part One
-7.11 editProfile Test part Two
-7.12 verifyEmail Test
-7.13 Conclusions
+[x] 7.0 Setting Up Tests
+[x] 7.1 Mocking
+[x] 7.2 Mocking part Two
+[x] 7.3 Writing Our First Test
+[x] 7.4 Recap
+[ ] 7.5 createAccount Test part One
+[ ] 7.6 createAccount Test part Two
+[ ] 7.7 login Test part One
+[ ] 7.8 login Test part Two
+[ ] 7.9 findById Test
+[ ] 7.10 editProfile Test part One
+[ ] 7.11 editProfile Test part Twok
+[ ] 7.12 verifyEmail Test
+[ ] 7.13 Conclusions
 
 8 UNIT TESTING JWT AND MAIL
 8.0 JWT Service Test Setup
