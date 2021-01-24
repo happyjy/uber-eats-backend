@@ -31,6 +31,7 @@ export class JwtService {
       this.options.privateKey,
     );
 
+    //암호화된 sign payload로 설정한 객체({id: userId})가 decode 된다.
     return jwt.verify(token, this.options.privateKey);
   }
 }
