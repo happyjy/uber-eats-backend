@@ -109,7 +109,7 @@ describe('UserService', () => {
       // # 분석: usersRepository.create.mockReturnValue(createAccountArgs);
       //  - usersRepository.create의 return value 값은 아래 코드1의 "createAccountArgs" 값과 같아야 success!
       //  - 코드1: expect(usersRepository.save).toHaveBeenCalledWith(createAccountArgs)
-      console.log(`#1: , ${userFindOne}/// ${userFindOne()}`); //userFindOne() promise 객체 반환
+      // console.log(`#1: , ${userFindOne}/// ${userFindOne()}`); //userFindOne() promise 객체 반환
       userFindOne().then(
         (result) => console.log('promise > result: ', result),
         (error) => console.log('promise > result: ', error),
@@ -118,7 +118,7 @@ describe('UserService', () => {
       // usersRepository.create() 수행 시 createAccountArgs 반환
       usersRepository.create.mockReturnValue(createAccountArgs);
       usersRepository.save.mockResolvedValue(createAccountArgs);
-      console.log('#1.1: ', usersRepository.create);
+      // console.log('#1.1: ', usersRepository.create);
 
       verificationsRepository.create.mockReturnValue({
         user: createAccountArgs,
@@ -129,8 +129,8 @@ describe('UserService', () => {
 
       const result = await service.createAccount(createAccountArgs);
 
-      console.log('#2: ', result);
-      console.log('#3: ', Object.keys(usersRepository), usersRepository);
+      // console.log('#2: ', result);
+      // console.log('#3: ', Object.keys(usersRepository), usersRepository);
       // #STEP2 - 계정 생성
       expect(usersRepository.create).toHaveBeenCalledTimes(1);
       expect(usersRepository.create).toHaveBeenCalledWith(createAccountArgs);

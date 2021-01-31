@@ -13,11 +13,7 @@ export class MailService {
     // this.sendEmail('testing', 'test');
   }
 
-  private async sendEmail(
-    subject: string,
-    template: string,
-    emailVars: EmailVar[],
-  ) {
+  async sendEmail(subject: string, template: string, emailVars: EmailVar[]) {
     // mailgun api curl 설정
     const form = new FormData();
 
