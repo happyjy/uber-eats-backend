@@ -1,14 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { async } from 'rxjs';
+import got from 'got';
+import * as FormData from 'form-data';
 import { CONFIG_OPTIONS } from 'src/common/common.constants';
 import { MailService } from './mail.service';
 
-jest.mock('got', () => {});
-jest.mock('form-data', () => {
-  return {
-    append: jest.fn(),
-  };
-});
+//service애서 사용한 모듈 자체를 mock할 수 있다.
+jest.mock('got');
+jest.mock('form-data');
+
+const TEST_DOMAIN = 'test-domain';
 
 describe('MailService', () => {
   let service: MailService;
@@ -21,7 +21,7 @@ describe('MailService', () => {
           provide: CONFIG_OPTIONS,
           useValue: {
             apiKey: 'test-apiKey',
-            domain: 'test-domain',
+            domain: TEST_DOMAIN,
             fromEmail: 'test-fromEmail',
           },
         },
@@ -44,7 +44,7 @@ describe('MailService', () => {
       // * 함수를 mock할 수 없어 spy를 사용
       // * mockImplementation: sendEmail 함수를 모두 implementation 할 수 있음
       //    - sendVerificationEmail함수에서 sendEmail을 호출 했을 때 호출된 함수 sendEmail을 spyOn으로 구현하면 spyOn으로 구현된 함수가 수행된다.(실제 mailservice의 sendEmail을 호출하지 않는다. )
-      jest.spyOn(service, 'sendEmail').mockImplementation(async () => {});
+      jest.spyOn(service, 'sendEmail').mockImplementation(async () => true);
       service.sendVerificationEmail(
         sendVerificationEmailArgs.email,
         sendVerificationEmailArgs.code,
@@ -60,5 +60,25 @@ describe('MailService', () => {
       );
     });
   });
-  it.todo('sendEmail');
+
+  describe('sendEmail', () => {
+    it('sends email', async () => {
+      const ok = await service.sendEmail('', '', []);
+      const formSpy = jest.spyOn(FormData.prototype, 'append');
+      expect(formSpy).toHaveBeenCalled();
+      expect(got.post).toHaveBeenCalledTimes(1);
+      expect(got.post).toHaveBeenCalledWith(
+        `https://api.mailgun.net/v3/${TEST_DOMAIN}/messages`,
+        expect.any(Object),
+      );
+      expect(ok).toEqual(true);
+    });
+    it('fails on error', async () => {
+      jest.spyOn(got, 'post').mockImplementation(() => {
+        throw new Error();
+      });
+      const ok = await service.sendEmail('', '', []);
+      expect(ok).toEqual(false);
+    });
+  });
 });
