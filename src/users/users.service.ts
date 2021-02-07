@@ -32,7 +32,7 @@ export class UserService {
     //   '### UserService > SECRET_KEY: ',
     //   this.config.get('SECRET_KEY'),
     // );
-    console.log('###     UserService > SECRET_KEY: ', process.env.SECRET_KEY);
+    console.log('### UserService > SECRET_KEY: ', process.env.SECRET_KEY);
 
     // this.jwtService.hello();
   }

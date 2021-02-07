@@ -9,7 +9,7 @@ export class MailService {
   constructor(
     @Inject(CONFIG_OPTIONS) private readonly options: MailModuleOptions,
   ) {
-    console.log('### MailService > options: ', options);
+    console.log('### MailService > constructor > options: ', options);
     // this.sendEmail('testing', 'test');
   }
 
@@ -29,7 +29,7 @@ export class MailService {
     form.append('subject', subject);
     form.append('template', template);
 
-    console.log('### mailService: ', emailVars);
+    console.log('### mailService > sendEmail: ', emailVars);
     emailVars.forEach((eVar) => form.append(`v:${eVar.key}`, eVar.value));
     try {
       await got.post(
@@ -45,7 +45,10 @@ export class MailService {
       );
       return true;
     } catch (error) {
-      console.log(error);
+      console.log(
+        '### mailService > got.post try catch > catch > error :',
+        error,
+      );
       return false;
     }
   }
