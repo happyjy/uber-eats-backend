@@ -6,7 +6,7 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import * as bcrypt from 'bcrypt';
-import { IsEmail, IsEnum } from 'class-validator';
+import { IsBoolean, IsEmail, IsEnum, IsString } from 'class-validator';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 
@@ -31,6 +31,7 @@ export class User extends CoreEntity {
   // Feild에 nullable true 설정으로 graphql query req시 에러나지 않도록 수정
   @Column({ select: false }) // 조회 select에서 빠지도록
   @Field((type) => String, { nullable: true })
+  @IsString()
   password: string;
 
   @Column({ type: 'enum', enum: UserRole })
@@ -40,6 +41,7 @@ export class User extends CoreEntity {
 
   @Column({ default: false })
   @Field((type) => Boolean)
+  @IsBoolean()
   verified: boolean;
 
   // DB inser, update시 먼저 수행되는 함수

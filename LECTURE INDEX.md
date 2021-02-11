@@ -93,44 +93,44 @@ LECTURE INDEX
 [ ] 7.13 Conclusions
 
 8 UNIT TESTING JWT AND MAIL
-8.0 JWT Service Test Setup
-8.1 JWT Sign Test
-8.2 JWT Verify Test
-8.3 sendVerificationEmail Test
-8.4 sendEmail Test
+[ ] 8.0 JWT Service Test Setup
+[ ] 8.1 JWT Sign Test
+[ ] 8.2 JWT Verify Test
+[ ] 8.3 sendVerificationEmail Test
+[ ] 8.4 sendEmail Test
 
 9 USER MODULE E2E
-9.0 Setup part One
-9.1 Setup part Two
-9.2 Testing createAccount part One
-9.3 Testing createAccount part Two
-9.4 Testing login
-9.5 Testing userProfile
-9.6 Testing me
-9.7 Testing editProfile
-9.8 Testing verifyEmail
-9.9 Conclusions
+[ ] 9.0 Setup part One
+[ ] 9.1 Setup part Two
+[ ] 9.2 Testing createAccount part One
+[ ] 9.3 Testing createAccount part Two
+[ ] 9.4 Testing login
+[ ] 9.5 Testing userProfile
+[ ] 9.6 Testing me
+[ ] 9.7 Testing editProfile
+[ ] 9.8 Testing verifyEmail
+[ ] 9.9 Conclusions
 
 10 RESTAURANT CRUD
-10.0 Restaurant Models
-10.1 Relationships and InputTypes
-10.2 createRestaurant part One
-10.3 createRestaurant part Two
-10.4 Roles part One
-10.5 Roles part Two
-10.6 Roles Recap
-10.7 Edit Restaurant part One
-10.8 Edit Restaurant part Two
-10.9 Edit Restaurant part Three
-10.10 Edit Restaurant Testing
-10.11 Delete Restaurant
-10.12 Categories part One
-10.13 Categories part Two
-10.14 Category
-10.15 Pagination
-10.16 Restaurants
-10.17 Restaurant and Search
-10.18 Search part Two
+[ ] 10.0 Restaurant Models
+[ ] 10.1 Relationships and InputTypes
+[ ] 10.2 createRestaurant part One
+[ ] 10.3 createRestaurant part Two
+[ ] 10.4 Roles part One
+[ ] 10.5 Roles part Two
+[ ] 10.6 Roles Recap
+[ ] 10.7 Edit Restaurant part One
+[ ] 10.8 Edit Restaurant part Two
+[ ] 10.9 Edit Restaurant part Three
+[ ] 10.10 Edit Restaurant Testing
+[ ] 10.11 Delete Restaurant
+[ ] 10.12 Categories part One
+[ ] 10.13 Categories part Two
+[ ] 10.14 Category
+[ ] 10.15 Pagination
+[ ] 10.16 Restaurants
+[ ] 10.17 Restaurant and Search
+[ ] 10.18 Search part Two
 
 11 DISH AND ORDER CRUD
 11.0 Dish Entity
