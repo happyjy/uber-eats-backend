@@ -4,7 +4,7 @@ import { IsString, Length } from 'class-validator';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { CoreEntity } from './core.entity';
 
-@InputType({ isAbstract: true })
+@InputType('CategoryInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class Category extends CoreEntity {
@@ -19,7 +19,7 @@ export class Category extends CoreEntity {
   @IsString()
   coverImg: string;
 
-  @Field((type) => [Restaurant])
+  @Field((type) => [Restaurant], { nullable: true })
   @OneToMany((type) => Restaurant, (restaurant) => restaurant.category)
   restaurants: Restaurant[];
 }

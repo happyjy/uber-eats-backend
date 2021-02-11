@@ -8,16 +8,16 @@ import * as Joi from 'joi'; // javascript module을 import 할때는 이런 식�
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { RestaurantsModule } from './restaurants/restaurants.module';
-// import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { JwtMiddleware } from './jwt/jwt.middleware';
-import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
-// import { CommonModule } from './common/common.module';
 import { JwtModule } from './jwt/jwt.module';
-import { Verification } from './users/entities/verification.entity';
-// import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { UsersModule } from './users/users.module';
+import { RestaurantsModule } from './restaurants/restaurants.module';
+// import { AuthModule } from './auth/auth.module';
+// import { RestaurantsModule } from './restaurants/restaurants.module';
+// import { CommonModule } from './common/common.module';
+import { Verification } from './users/entities/verification.entity';
+import { User } from './users/entities/user.entity';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './common/entities/category.entity';
 
@@ -73,7 +73,7 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
       domain: process.env.MAILGUN_DOMAIN_NAME,
       fromEmail: process.env.MAILGUN_FROM_EMAIL,
     }),
-    // RestaurantsModule,
+    RestaurantsModule,
     UsersModule,
     // AuthModule,
     // CommonModule,
