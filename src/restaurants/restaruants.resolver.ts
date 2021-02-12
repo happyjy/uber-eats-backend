@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthUser } from 'src/auth/auth-user.decorator';
+import { Role } from 'src/auth/role.decorator';
 import { User } from 'src/users/entities/user.entity';
 import { Restaurant } from './entities/restaurant.entity';
 import { RestaurantService } from './restaurants.service';
@@ -8,7 +9,10 @@ import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
 } from './dtos/create-restaurant.dto';
-import { Role } from 'src/auth/role.decorator';
+import {
+  EditRestaurantInput,
+  EditRestaurantOutput,
+} from './dtos/edit-restaurant.dto';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -32,22 +36,31 @@ export class RestaurantResolver {
     );
   }
 
-  @Mutation((returns) => Boolean)
-  async updateRestaurant(
-    // # 'input' 설명
-    //  - dto에 @InputType을 사용했을때 사용하는 설정 방법이다.
-    //  - InputType이 아니라 @ArgsType() 사용할 경우 @Args()로 설정하면된다.
-    @Args('input') updateRestaurantDto: UpdateRestaurantDto,
-  ): Promise<boolean> {
-    console.log('### updateRestaurant', updateRestaurantDto);
-    try {
-      await this.restaurantService.updateRestaurant(updateRestaurantDto);
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
+  @Mutation((returns) => EditRestaurantOutput)
+  @Role(['Owner'])
+  editRestaurant(
+    @AuthUser() AuthUser: User,
+    @Args('input') editRestaurantInput: EditRestaurantInput,
+  ): EditRestaurantOutput {
+    return { ok: true };
   }
+
+  // @Mutation((returns) => Boolean)
+  // async updateRestaurant(
+  //   // # 'input' 설명
+  //   //  - dto에 @InputType을 사용했을때 사용하는 설정 방법이다.
+  //   //  - InputType이 아니라 @ArgsType() 사용할 경우 @Args()로 설정하면된다.
+  //   @Args('input') updateRestaurantDto: UpdateRestaurantDto,
+  // ): Promise<boolean> {
+  //   console.log('### updateRestaurant', updateRestaurantDto);
+  //   try {
+  //     await this.restaurantService.updateRestaurant(updateRestaurantDto);
+  //     return true;
+  //   } catch (e) {
+  //     console.log(e);
+  //     return false;
+  //   }
+  // }
 
   // createRestaurant 변수로 들어가 @Args들을 Dto class를 만들어 보자 위 createRestaurant 확인
   // @Mutation((returns) => Boolean)

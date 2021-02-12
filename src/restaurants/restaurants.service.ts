@@ -9,6 +9,10 @@ import {
 import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 import { User } from 'src/users/entities/user.entity';
 import { Category } from 'src/common/entities/category.entity';
+import {
+  EditRestaurantInput,
+  EditRestaurantOutput,
+} from './dtos/edit-restaurant.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -65,77 +69,14 @@ export class RestaurantService {
     }
   }
 
-  // async createRestaurant(
-  //   owner: User,
-  //   createRestaurantInput: CreateRestaurantInput,
-  // ): Promise<CreateRestaurantOutput> {
-  //   try {
-  //     /*
-  //       # category가 없다면 생성
-  //       # Repository.create: return Entity instance
-  //     */
-  //     const newRestaurant = this.restaurants.create(createRestaurantInput);
-  //     newRestaurant.owner = owner;
-  //     console.log(
-  //       '### restaurant.service > createResaurant > newRestaurant: ',
-  //       newRestaurant,
-  //     );
-  //     const categoryName = createRestaurantInput.categoryName
-  //       .trim()
-  //       .toLowerCase()
-  //       .replace(/ +/g, ' ');
-  //     console.log(
-  //       '### restaurant.service > createResaurant > categoryName: ',
-  //       categoryName,
-  //     );
-  //     const categorySlug = categoryName.replace(/ /g, '-');
-  //     console.log(
-  //       '### restaurant.service > createResaurant > categorySlug: ',
-  //       categorySlug,
-  //     );
-  //     console.log(
-  //       '### restaurant.service > createResaurant > this.categories.findOne: ',
-  //       this.categories.findOne,
-  //     );
-  //     // let category = await this.categories.findOne({ slug: categorySlug });
-  //     let category = await this.categories.findOne({ name: categoryName });
-  //     console.log(
-  //       '### restaurant.service > createResaurant > category: ',
-  //       category,
-  //     );
-  //     if (!category) {
-  //       console.log(
-  //         '### restaurant.service > createResaurant > categorySlug, categoryName: ',
-  //         categorySlug,
-  //         categoryName,
-  //       );
-  //       const categoryEntity = this.categories.create({
-  //         slug: categorySlug,
-  //         name: categoryName,
-  //       });
-  //       console.log(
-  //         '### restaurant.service > createResaurant > categoryEntity: ',
-  //         categoryEntity,
-  //       );
-  //       category = await this.categories.save(categoryEntity);
-  //     }
-  //     console.log(
-  //       '### restaurant.service > createResaurant > category: ',
-  //       category,
-  //     );
-  //     newRestaurant.category = category;
-  //     await this.restaurants.save(newRestaurant);
-  //     return {
-  //       ok: true,
-  //     };
-  //   } catch {
-  //     return {
-  //       ok: false,
-  //       error: 'Could not create restaurant',
-  //     };
-  //   }
-  // }
-  updateRestaurant({ id, data }: UpdateRestaurantDto) {
-    return this.restaurants.update(id, { ...data });
+  async editRestaurant(
+    owner: User,
+    editRestaurantInput: EditRestaurantInput,
+  ): Promise<EditRestaurantOutput> {
+    return;
   }
+
+  // updateRestaurant({ id, data }: UpdateRestaurantDto) {
+  //   return this.restaurants.update(id, { ...data });
+  // }
 }
