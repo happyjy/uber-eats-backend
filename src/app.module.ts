@@ -11,9 +11,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtMiddleware } from './jwt/jwt.middleware';
 import { JwtModule } from './jwt/jwt.module';
 import { MailModule } from './mail/mail.module';
+import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
-// import { AuthModule } from './auth/auth.module';
 // import { RestaurantsModule } from './restaurants/restaurants.module';
 // import { CommonModule } from './common/common.module';
 import { Verification } from './users/entities/verification.entity';
@@ -73,9 +73,9 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
       domain: process.env.MAILGUN_DOMAIN_NAME,
       fromEmail: process.env.MAILGUN_FROM_EMAIL,
     }),
+    AuthModule,
     RestaurantsModule,
     UsersModule,
-    // AuthModule,
     // CommonModule,
   ],
   controllers: [],
