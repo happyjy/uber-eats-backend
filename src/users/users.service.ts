@@ -131,7 +131,7 @@ export class UserService {
 
   async editProfile(
     userId: number,
-    { email, password }: EditProfileInput,
+    { email, password, role }: EditProfileInput,
   ): Promise<EditProfileOutput> {
     try {
       const user = await this.users.findOne(userId);
@@ -149,6 +149,10 @@ export class UserService {
 
       if (password) {
         user.password = password;
+      }
+
+      if (role) {
+        user.role = role;
       }
 
       // upate: csascade하지 않고 해당 entity에만 저장한다/ entity여부를 확인하지 않는다.
