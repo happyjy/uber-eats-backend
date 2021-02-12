@@ -18,11 +18,6 @@ import {
 @Resolver(() => Restaurant)
 export class RestaurantResolver {
   constructor(private readonly restaurantService: RestaurantService) {}
-  @Query((returns) => [Restaurant])
-  restaurants(): Promise<Restaurant[]> {
-    console.log(CreateRestaurantOutput);
-    return this.restaurantService.getAll();
-  }
 
   @Mutation((returns) => CreateRestaurantOutput)
   @Role(['Owner'])
@@ -44,6 +39,12 @@ export class RestaurantResolver {
   ): EditRestaurantOutput {
     return { ok: true };
   }
+
+  // @Query((returns) => [Restaurant])
+  // restaurants(): Promise<Restaurant[]> {
+  //   console.log(CreateRestaurantOutput);
+  //   return this.restaurantService.getAll();
+  // }
 
   // @Mutation((returns) => Boolean)
   // async updateRestaurant(
