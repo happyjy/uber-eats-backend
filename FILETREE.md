@@ -42,7 +42,7 @@ src
 
  src
  ┣ auth
- ┃ ┣ auth-user.decorator.ts
+ ┃ ┣ auth-user.decorator.ts: decorator(resolver접근 여부)
  ┃ ┣ auth.guard.ts
  ┃ ┗ auth.module.ts
  ┣ common

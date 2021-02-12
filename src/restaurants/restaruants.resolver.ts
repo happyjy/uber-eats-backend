@@ -8,6 +8,7 @@ import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
 } from './dtos/create-restaurant.dto';
+import { Role } from 'src/auth/role.decorator';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -20,6 +21,7 @@ export class RestaurantResolver {
   }
 
   @Mutation((returns) => CreateRestaurantOutput)
+  @Role(['Owner'])
   async createRestaurant(
     @AuthUser() authUser: User,
     @Args('input') createRestaurantInput: CreateRestaurantInput,
