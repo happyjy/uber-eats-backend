@@ -69,7 +69,7 @@ src
  ┃ ┃ ┗ update-restaurant.dto.ts
  ┃ ┣ entities
  ┃ ┃ ┗ restaurant.entity.ts
- ┃ ┣ restaruants.resolver.ts
+ ┃ ┣ restaurants.resolver.ts
  ┃ ┣ restaurants.module.ts
  ┃ ┗ restaurants.service.ts
  ┣ users

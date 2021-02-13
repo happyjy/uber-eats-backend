@@ -13,6 +13,10 @@ import {
   EditRestaurantInput,
   EditRestaurantOutput,
 } from './dtos/edit-restaurant.dto';
+import {
+  DeleteRestaurantInput,
+  DeleteRestaurantOutput,
+} from './dtos/delete-restaurant.dto';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -40,6 +44,17 @@ export class RestaurantResolver {
     return this.restaurantService.editRestaurant(owner, editRestaurantInput);
   }
 
+  @Mutation((returns) => DeleteRestaurantOutput)
+  @Role(['Owner'])
+  deleteRestaurant(
+    @AuthUser() owner: User,
+    @Args('input') DeleteRestaurantInput: DeleteRestaurantInput,
+  ) {
+    return this.restaurantService.deleteRestaurant(
+      owner,
+      DeleteRestaurantInput,
+    );
+  }
   // @Query((returns) => [Restaurant])
   // restaurants(): Promise<Restaurant[]> {
   //   console.log(CreateRestaurantOutput);
