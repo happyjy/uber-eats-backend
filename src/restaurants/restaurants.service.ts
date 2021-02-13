@@ -158,6 +158,12 @@ export class RestaurantService {
       };
     }
   }
+
+  countRestaurants(category: Category) {
+    return this.restaurants.count({ category });
+    // return this.restaurants.count({ id: category.id });
+  }
+
   // getAll(): Promise<Restaurant[]> {
   //   return this.restaurants.find();
   // }
