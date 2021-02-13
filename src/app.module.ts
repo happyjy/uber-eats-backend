@@ -19,7 +19,7 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
 import { Verification } from './users/entities/verification.entity';
 import { User } from './users/entities/user.entity';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
-import { Category } from './common/entities/category.entity';
+import { Category } from './restaurants/entities/category.entity';
 
 console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({

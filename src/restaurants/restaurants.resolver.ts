@@ -1,4 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { AuthUser } from 'src/auth/auth-user.decorator';
 import { Role } from 'src/auth/role.decorator';
 import { User } from 'src/users/entities/user.entity';
@@ -17,6 +24,8 @@ import {
   DeleteRestaurantInput,
   DeleteRestaurantOutput,
 } from './dtos/delete-restaurant.dto';
+import { Category } from './entities/category.entity';
+import { AllCategoriesOutput } from './dtos/all-categories.dto';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -92,4 +101,19 @@ export class RestaurantResolver {
   //   // typscript를 위한 return type
   //   return true;
   // }
+}
+
+@Resolver((of) => Category)
+export class CategoryResolver {
+  constructor(private readonly restaurantservice: RestaurantService) {}
+
+  @ResolveField((type) => Int)
+  restaurantCount(): number {
+    return 80;
+  }
+
+  @Query((type) => AllCategoriesOutput)
+  allCategories(): Promise<AllCategoriesOutput> {
+    return this.restaurantservice.allCategories();
+  }
 }

@@ -1,4 +1,4 @@
-import { Category } from 'src/common/entities/category.entity';
+import { Category } from 'src/restaurants/entities/category.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Category)
