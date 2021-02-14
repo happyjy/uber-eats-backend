@@ -28,6 +28,7 @@ import {
 import { Category } from './entities/category.entity';
 import { AllCategoriesOutput } from './dtos/all-categories.dto';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
+import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -107,22 +108,30 @@ export class RestaurantResolver {
 
 @Resolver((of) => Category)
 export class CategoryResolver {
-  constructor(private readonly restaurantservice: RestaurantService) {}
+  constructor(private readonly restaurantService: RestaurantService) {}
 
   @ResolveField((type) => Int)
   restaurantCount(@Parent() category: Category): Promise<number> {
-    return this.restaurantservice.countRestaurants(category);
+    return this.restaurantService.countRestaurants(category);
   }
 
   @Query((type) => AllCategoriesOutput)
   allCategories(): Promise<AllCategoriesOutput> {
-    return this.restaurantservice.allCategories();
+    return this.restaurantService.allCategories();
   }
 
   @Query((type) => CategoryOutput)
   category(
     @Args('input') categoryInput: CategoryInput,
   ): Promise<CategoryOutput> {
-    return this.restaurantservice.findCategoryBySlug(categoryInput);
+    return this.restaurantService.findCategoryBySlug(categoryInput);
+  }
+
+  @Query((returns) => RestaurantsOutput)
+  restaurants(
+    @Args('input') restaurantsInput: RestaurantsInput,
+  ): Promise<RestaurantsOutput> {
+    console.log('###: ', restaurantsInput);
+    return this.restaurantService.allRestaurants(restaurantsInput);
   }
 }

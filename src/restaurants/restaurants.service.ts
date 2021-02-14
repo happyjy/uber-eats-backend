@@ -21,6 +21,7 @@ import {
 import { AllCategoriesOutput } from './dtos/all-categories.dto';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
 import { Args } from '@nestjs/graphql';
+import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -188,18 +189,39 @@ export class RestaurantService {
         skip: (page - 1) * 25,
       });
 
-      category.restaurants = restaurants;
+      // category.restaurants = restaurants;
       const totalResults = await this.countRestaurants(category);
 
       return {
         ok: true,
+        restaurants,
         category,
-        totlaPages: Math.ceil(totalResults / 25),
+        totalPages: Math.ceil(totalResults / 25),
       };
     } catch (error) {
       return {
         ok: false,
         error: 'Could not laod category',
+      };
+    }
+  }
+
+  async allRestaurants({ page }: RestaurantsInput): Promise<RestaurantsOutput> {
+    try {
+      const [restaurants, totalResults] = await this.restaurants.findAndCount({
+        skip: (page - 1) * 25,
+        take: 25,
+      });
+      return {
+        ok: true,
+        totalPages: Math.ceil(totalResults / 25),
+        totalResults,
+        results: restaurants,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not load restaurants',
       };
     }
   }
