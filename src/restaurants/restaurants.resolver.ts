@@ -34,6 +34,8 @@ import {
   SearchRestaurantInput,
   SearchRestaurantOutput,
 } from './dtos/search-restaurant.dto';
+import { CreateDishInput } from './dtos/create-dish.dto';
+import { Dish } from './entities/dish.entity';
 
 // decoration으로 이파일이 resolver 기능을 하도록 하는 기능을 한다.
 @Resolver(() => Restaurant)
@@ -152,5 +154,17 @@ export class CategoryResolver {
   ): Promise<RestaurantsOutput> {
     console.log('###: ', restaurantsInput);
     return this.restaurantService.allRestaurants(restaurantsInput);
+  }
+}
+
+@Resolver((of) => Dish)
+export class DishResolver {
+  constructor(private readonly restaurantService: RestaurantService) {}
+
+  createDish(
+    @AuthUser() owner: User,
+    @Args('input') createDishInput: CreateDishInput,
+  ) {
+    return this.restaurantService.createDish(owner, createDishInput);
   }
 }
