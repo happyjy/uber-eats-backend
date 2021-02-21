@@ -20,6 +20,7 @@ import { Verification } from './users/entities/verification.entity';
 import { User } from './users/entities/user.entity';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './restaurants/entities/category.entity';
+import { Dish } from './restaurants/entities/dish.entity';
 
 console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -53,7 +54,14 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
       synchronize: process.env.NODE_ENV !== 'prod',
       logging:
         process.env.NODE_ENV !== 'prod' && process.env.NODE_ENV !== 'test',
-      entities: [/* Restaurant, */ User, Verification, Restaurant, Category], // table 생성 설정
+      entities: [
+        /* Restaurant, */
+        User,
+        Verification,
+        Restaurant,
+        Category,
+        Dish,
+      ], // table 생성 설정
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],
       // subscribers: ['src/subscriber/**/*.ts'],

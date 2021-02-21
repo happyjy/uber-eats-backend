@@ -82,87 +82,87 @@ LECTURE INDEX
 [x] 7.2 Mocking part Two
 [x] 7.3 Writing Our First Test
 [x] 7.4 Recap
-[ ] 7.5 createAccount Test part One
-[ ] 7.6 createAccount Test part Two
-[ ] 7.7 login Test part One
-[ ] 7.8 login Test part Two
-[ ] 7.9 findById Test
-[ ] 7.10 editProfile Test part One
-[ ] 7.11 editProfile Test part Twok
-[ ] 7.12 verifyEmail Test
-[ ] 7.13 Conclusions
+[x] 7.5 createAccount Test part One
+[x] 7.6 createAccount Test part Two
+[x] 7.7 login Test part One
+[x] 7.8 login Test part Two
+[x] 7.9 findById Test
+[x] 7.10 editProfile Test part One
+[x] 7.11 editProfile Test part Twok
+[x] 7.12 verifyEmail Test
+[x] 7.13 Conclusions
 
 8 UNIT TESTING JWT AND MAIL
-[ ] 8.0 JWT Service Test Setup
-[ ] 8.1 JWT Sign Test
-[ ] 8.2 JWT Verify Test
-[ ] 8.3 sendVerificationEmail Test
-[ ] 8.4 sendEmail Test
+[x] 8.0 JWT Service Test Setup
+[x] 8.1 JWT Sign Test
+[x] 8.2 JWT Verify Test
+[x] 8.3 sendVerificationEmail Test
+[x] 8.4 sendEmail Test
 
 9 USER MODULE E2E
-[ ] 9.0 Setup part One
-[ ] 9.1 Setup part Two
-[ ] 9.2 Testing createAccount part One
-[ ] 9.3 Testing createAccount part Two
-[ ] 9.4 Testing login
-[ ] 9.5 Testing userProfile
-[ ] 9.6 Testing me
-[ ] 9.7 Testing editProfile
-[ ] 9.8 Testing verifyEmail
-[ ] 9.9 Conclusions
+[x] 9.0 Setup part One
+[x] 9.1 Setup part Two
+[x] 9.2 Testing createAccount part One
+[x] 9.3 Testing createAccount part Two
+[x] 9.4 Testing login
+[x] 9.5 Testing userProfile
+[x] 9.6 Testing me
+[x] 9.7 Testing editProfile
+[x] 9.8 Testing verifyEmail
+[x] 9.9 Conclusions
 
 10 RESTAURANT CRUD
-[ ] 10.0 Restaurant Models
-[ ] 10.1 Relationships and InputTypes
-[ ] 10.2 createRestaurant part One
-[ ] 10.3 createRestaurant part Two
-[ ] 10.4 Roles part One
-[ ] 10.5 Roles part Two
-[ ] 10.6 Roles Recap
-[ ] 10.7 Edit Restaurant part One
-[ ] 10.8 Edit Restaurant part Two
-[ ] 10.9 Edit Restaurant part Three
-[ ] 10.10 Edit Restaurant Testing
-[ ] 10.11 Delete Restaurant
-[ ] 10.12 Categories part One
-[ ] 10.13 Categories part Two
-[ ] 10.14 Category
-[ ] 10.15 Pagination
-[ ] 10.16 Restaurants
-[ ] 10.17 Restaurant and Search
-[ ] 10.18 Search part Two
+[x] 10.0 Restaurant Models
+[x] 10.1 Relationships and InputTypes
+[x] 10.2 createRestaurant part One
+[x] 10.3 createRestaurant part Two
+[x] 10.4 Roles part One
+[x] 10.5 Roles part Two
+[x] 10.6 Roles Recap
+[x] 10.7 Edit Restaurant part One
+[x] 10.8 Edit Restaurant part Two
+[x] 10.9 Edit Restaurant part Three
+[x] 10.10 Edit Restaurant Testing
+[x] 10.11 Delete Restaurant
+[x] 10.12 Categories part One
+[x] 10.13 Categories part Two
+[x] 10.14 Category
+[x] 10.15 Pagination
+[x] 10.16 Restaurants
+[x] 10.17 Restaurant and Search
+[x] 10.18 Search part Two
 
 11 DISH AND ORDER CRUD
-11.0 Dish Entity
-11.1 Create Dish part One
-11.2 Create Dish part Two
-11.3 Edit and Delete Dish
-11.4 Order Entity
-11.5 Create Order part One
-11.6 Order Items
-11.7 Create Order part Two
-11.8 Create Order part Three
-11.9 Create Order part Four
-11.10 Create Order part Five
-11.11 Create Order part Six
-11.12 getOrders part One
-11.13 getOrders and getOrder
-11.14 Edit Order
+[ ] 11.0 Dish Entity
+[ ] 11.1 Create Dish part One
+[ ] 11.2 Create Dish part Two
+[ ] 11.3 Edit and Delete Dish
+[ ] 11.4 Order Entity
+[ ] 11.5 Create Order part One
+[ ] 11.6 Order Items
+[ ] 11.7 Create Order part Two
+[ ] 11.8 Create Order part Three
+[ ] 11.9 Create Order part Four
+[ ] 11.10 Create Order part Five
+[ ] 11.11 Create Order part Six
+[ ] 11.12 getOrders part One
+[ ] 11.13 getOrders and getOrder
+[ ] 11.14 Edit Order
 
 12 ORDER SUBSCRIPTIONS
-12.0 Subscriptions part One
-12.1 Subscriptions part Two
-12.2 Subscription Authentication part One
-12.3 Subscription Authentication part Two
-12.4 PUB_SUB
-12.5 Subscription Filter
-12.6 Subscription Resolve
-12.7 pendingOrders Subscription part One
-12.8 pendingOrders Subscription part Two
-12.9 cookedOrders
-12.10 orderUpdates part One
-12.11 orderUpdates
-12.12 takeOrder
+[ ] 12.0 Subscriptions part One
+[ ] 12.1 Subscriptions part Two
+[ ] 12.2 Subscription Authentication part One
+[ ] 12.3 Subscription Authentication part Two
+[ ] 12.4 PUB_SUB
+[ ] 12.5 Subscription Filter
+[ ] 12.6 Subscription Resolve
+[ ] 12.7 pendingOrders Subscription part One
+[ ] 12.8 pendingOrders Subscription part Two
+[ ] 12.9 cookedOrders
+[ ] 12.10 orderUpdates part One
+[ ] 12.11 orderUpdates
+[ ] 12.12 takeOrder
 
 13 PAYMENTS
 13.0 Payment Introduction
