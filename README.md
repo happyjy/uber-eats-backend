@@ -3,7 +3,6 @@
 The Backend of Uber Eats Clone
 
 ## User Model:
-
 - id
 - createdAt
 - updatedAt
@@ -12,8 +11,7 @@ The Backend of Uber Eats Clone
 - password
 - role(client|owner|delivery)
 
-## User CRUD:
-
+## User
 - Create Account
 - Log In
 - See Profile
@@ -30,7 +28,16 @@ The Backend of Uber Eats Clone
 - See Restaurants (pagination)
 - See Restaurant
 
-
+# Dish
 - Create Dish
 - Edit Dish
 - Delete Dish
+
+# Order
+- Orders CRUD
+- Orders Subscription (Owner, Customer, Delivery)
+
+# Payments
+- Payments (CRON)
+
+
