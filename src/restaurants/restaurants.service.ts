@@ -1,4 +1,4 @@
-import { Like, Raw, Repository } from 'typeorm';
+import { Raw, Repository } from 'typeorm';
 import { Injectable, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant.entity';

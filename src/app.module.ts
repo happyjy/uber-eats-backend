@@ -21,6 +21,8 @@ import { User } from './users/entities/user.entity';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './restaurants/entities/category.entity';
 import { Dish } from './restaurants/entities/dish.entity';
+import { Order } from './orders/entities/order.entity';
+import { OrdersModule } from './orders/order.module';
 
 console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -54,7 +56,7 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
       synchronize: process.env.NODE_ENV !== 'prod',
       logging:
         process.env.NODE_ENV !== 'prod' && process.env.NODE_ENV !== 'test',
-      entities: [User, Verification, Restaurant, Category, Dish], // table 생성 설정
+      entities: [User, Verification, Restaurant, Category, Dish, Order], // table 생성 설정
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],
       // subscribers: ['src/subscriber/**/*.ts'],
@@ -77,6 +79,7 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
     AuthModule,
     RestaurantsModule,
     UsersModule,
+    OrdersModule,
     // CommonModule,
   ],
   controllers: [],
