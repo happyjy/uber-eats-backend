@@ -22,7 +22,7 @@ import { Restaurant } from './restaurants/entities/restaurant.entity';
 import { Category } from './restaurants/entities/category.entity';
 import { Dish } from './restaurants/entities/dish.entity';
 import { Order } from './orders/entities/order.entity';
-import { OrdersModule } from './orders/order.module';
+import { OrdersModule } from './orders/orders.module';
 
 console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
