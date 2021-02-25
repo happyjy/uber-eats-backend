@@ -39,12 +39,12 @@ export class Order extends CoreEntity {
   })
   driver?: User;
 
-  @Field((type) => Restaurant)
+  @Field((type) => Restaurant, { nullable: true })
   @ManyToOne((type) => Restaurant, (restaurant) => restaurant.orders, {
     onDelete: 'SET NULL',
     nullable: true,
   })
-  restaurant: Restaurant;
+  restaurant?: Restaurant;
   // @ManyToOne 2번째 파라미터는 optional이며 relation entity에 접근 해주고 싶을때만 설정
 
   @Field((type) => [OrderItem])
@@ -57,7 +57,7 @@ export class Order extends CoreEntity {
   @IsNumber()
   total?: number;
 
-  @Column({ type: 'enum', enum: OrderStatus })
+  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.Pending })
   @Field((type) => OrderStatus)
   @IsEnum(OrderStatus)
   status: OrderStatus;

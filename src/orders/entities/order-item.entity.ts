@@ -1,12 +1,25 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { Dish, DishOption } from 'src/restaurants/entities/dish.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
+@InputType('OrderItemOptionInputType', { isAbstract: true })
+@ObjectType()
+export class OrderItemOption {
+  @Field((type) => String)
+  name: string;
+
+  @Field((type) => String, { nullable: true })
+  choice?: String;
+
+  @Field((type) => Int, { nullable: true })
+  extra?: number;
+}
 @InputType('OrderItemInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class OrderItem extends CoreEntity {
+  // 한개 메뉴(dish)에 옵션(options)를 선택하는 구조
   @Field((type) => Dish)
   @ManyToOne((type) => Dish, { nullable: true, onDelete: 'CASCADE' })
   dish: Dish;
