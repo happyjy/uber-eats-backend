@@ -127,8 +127,8 @@ LECTURE INDEX
 [x] 10.12 Categories part One
 [x] 10.13 Categories part Two
 [x] 10.14 Category
-[x] 10.15 Pagination
-[x] 10.16 Restaurants
+[x] 10.15 Pagination of category by slug
+[x] 10.16 Pagination of Restaurants
 [x] 10.17 Restaurant and Search
 [x] 10.18 Search part Two
 
