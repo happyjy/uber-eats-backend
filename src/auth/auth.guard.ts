@@ -24,11 +24,11 @@ export class AuthGuard implements CanActivate {
       'roles',
       context.getHandler(), // 수행될 resolver
     );
-    console.log('### AuthGuard decorator > role: ', roles);
-    console.log(
-      '### AuthGuard decorator > context.getHandler(): ',
-      context.getHandler(),
-    );
+    // console.log('### AuthGuard decorator > role: ', roles);
+    // console.log(
+    //   '### AuthGuard decorator > context.getHandler(): ',
+    //   context.getHandler(),
+    // );
     if (!roles) {
       return true;
     }
