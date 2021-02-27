@@ -33,7 +33,7 @@ export class JwtMiddleware implements NestMiddleware {
           if (ok) {
             // # graphql context의 resolver에서 공유 가능
             req['user'] = user;
-            req['test'] = 'requestSetting';
+            // req['test'] = 'requestSetting';
             console.log('### jwt.middleware > use: ', user);
           }
         }

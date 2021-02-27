@@ -74,12 +74,16 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
     GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: true, // 메모리에서 부터 스키마를 생성한다.
-      context: ({ req }) => {
-        console.log(
-          '### app.module.ts -> GraphQLModule.forRoot({context: fn}) > req.user, req.test: ',
-          { test: req.test, user: req.user },
-        );
-        return { user: req['user'] };
+      context: ({ req, connection }) => {
+        // console.log(
+        //   '### app.module.ts -> GraphQLModule.forRoot({context: fn}) > req.user, req.test: ',
+        //   { test: req.test, user: req.user },
+        // );
+        if (req) {
+          return { user: req['user'] };
+        } else {
+          console.log(connection);
+        }
       },
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
