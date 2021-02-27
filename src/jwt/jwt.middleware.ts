@@ -20,21 +20,21 @@ export class JwtMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
-    // console.log('### jwt middleware > use > req.headers: ', req.headers);
+    console.log('### jwt.middleware > use > req.headers: ', req.headers);
     if ('x-jwt' in req.headers) {
       const token = req.headers['x-jwt'];
-      console.log('### jwt middleware > use > token: ', token);
+      console.log('### jwt.middleware > use > token: ', token);
       try {
         //sign 한것을 이곳에서 decoded
         const decoded = this.jwtService.verify(token.toString());
-        console.log('### jwt middleware > use > decoded: ', decoded);
+        console.log('### jwt.middleware > use > decoded: ', decoded);
         if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
           const { user, ok } = await this.userService.findById(decoded['id']);
           if (ok) {
-            // # graphql context에서 resolver에서 공유 가능
+            // # graphql context의 resolver에서 공유 가능
             req['user'] = user;
             req['test'] = 'requestSetting';
-            console.log('### jwt middleware > use: ', user);
+            console.log('### jwt.middleware > use: ', user);
           }
         }
       } catch (e) {}

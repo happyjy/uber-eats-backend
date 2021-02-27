@@ -133,21 +133,21 @@ LECTURE INDEX
 [x] 10.18 Search part Two
 
 11 DISH AND ORDER CRUD
-[ ] 11.0 Dish Entity
-[ ] 11.1 Create Dish part One
-[ ] 11.2 Create Dish part Two
-[ ] 11.3 Edit and Delete Dish
-[ ] 11.4 Order Entity
-[ ] 11.5 Create Order part One
-[ ] 11.6 Order Items
-[ ] 11.7 Create Order part Two
-[ ] 11.8 Create Order part Three
-[ ] 11.9 Create Order part Four
-[ ] 11.10 Create Order part Five
-[ ] 11.11 Create Order part Six
-[ ] 11.12 getOrders part One
-[ ] 11.13 getOrders and getOrder
-[ ] 11.14 Edit Order
+[x] 11.0 Dish Entity
+[x] 11.1 Create Dish part One
+[x] 11.2 Create Dish part Two
+[x] 11.3 Edit and Delete Dish
+[x] 11.4 Order Entity
+[x] 11.5 Create Order part One
+[x] 11.6 Order Items
+[x] 11.7 Create Order part Two
+[x] 11.8 Create Order part Three
+[x] 11.9 Create Order part Four
+[x] 11.10 Create Order part Five
+[x] 11.11 Create Order part Six
+[x] 11.12 getOrders part One
+[x] 11.13 getOrders and getOrder
+[x] 11.14 Edit Order
 
 12 ORDER SUBSCRIPTIONS
 [ ] 12.0 Subscriptions part One

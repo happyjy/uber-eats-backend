@@ -72,8 +72,15 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
     }),
     // GrpahQL 관련 설정
     GraphQLModule.forRoot({
+      installSubscriptionHandlers: true,
       autoSchemaFile: true, // 메모리에서 부터 스키마를 생성한다.
-      context: ({ req }) => ({ user: req['user'] }),
+      context: ({ req }) => {
+        console.log(
+          '### app.module.ts -> GraphQLModule.forRoot({context: fn}) > req.user, req.test: ',
+          { test: req.test, user: req.user },
+        );
+        return { user: req['user'] };
+      },
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
     JwtModule.forRoot({
