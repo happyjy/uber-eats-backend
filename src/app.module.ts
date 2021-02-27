@@ -24,6 +24,7 @@ import { Dish } from './restaurants/entities/dish.entity';
 import { Order } from './orders/entities/order.entity';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItem } from './orders/entities/order-item.entity';
+import { CommonModule } from './common/common.module';
 
 console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -99,6 +100,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
     RestaurantsModule,
     UsersModule,
     OrdersModule,
+    CommonModule,
     // CommonModule,
   ],
   controllers: [],
