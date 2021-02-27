@@ -25,7 +25,7 @@ import { Order } from './orders/entities/order.entity';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItem } from './orders/entities/order-item.entity';
 
-console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
+console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
   // server 관련 설정
   imports: [
@@ -79,11 +79,10 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
         //   '### app.module.ts -> GraphQLModule.forRoot({context: fn}) > req.user, req.test: ',
         //   { test: req.test, user: req.user },
         // );
-        if (req) {
-          return { user: req['user'] };
-        } else {
-          console.log(connection);
-        }
+        const TOKEN_KEY = 'x-jwt';
+        return {
+          token: req ? req.headers['x-jwt'] : connection.context['X-JWT'],
+        };
       },
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
@@ -105,14 +104,17 @@ console.log('### 210201 > process.env.NODE_ENV: ', process.env.NODE_ENV);
   controllers: [],
   providers: [],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    // client에서 forRoutes에 설정으로 request 보낼시 apply에 설정된 middleware execute
-    consumer
-      .apply(JwtMiddleware)
-      .forRoutes({ path: '/graphql', method: RequestMethod.POST });
-  }
-}
+export class AppModule {}
+// ### subscription 구현하면서 제거 됨
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     // client에서 forRoutes에 설정으로 request 보낼시 apply에 설정된 middleware execute
+//     consumer
+//       .apply(JwtMiddleware)
+//       .forRoutes({ path: '/graphql', method: RequestMethod.POST });
+//   }
+// }
+
 // export class AppModule implements NestModule {
 //   configure(consumer: MiddlewareConsumer) {
 //      //consumer.apply(JwtMiddleware).exclude: 특정 요청 제외 적용시 사용

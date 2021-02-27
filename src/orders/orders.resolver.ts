@@ -23,7 +23,7 @@ export class OrderResolver {
     @Args('input')
     createOrderInput: CreateOrderInput,
   ): Promise<CreateOrderOutput> {
-    console.log('###1 createOrderInput: ', createOrderInput);
+    console.log('### createOrderInput: ', createOrderInput);
     return this.ordersService.createOrder(customer, createOrderInput);
   }
 
@@ -63,7 +63,9 @@ export class OrderResolver {
   }
 
   @Subscription((returns) => String)
-  readyPotato() {
+  @Role(['Any'])
+  readyPotato(@AuthUser() user: User) {
+    console.log(user);
     return pubsub.asyncIterator('hotPotatos');
   }
 }
