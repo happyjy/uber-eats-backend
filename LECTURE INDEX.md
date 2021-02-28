@@ -150,30 +150,30 @@ LECTURE INDEX
 [x] 11.14 Edit Order
 
 12 ORDER SUBSCRIPTIONS
-[ ] 12.0 Subscriptions part One
-[ ] 12.1 Subscriptions part Two
-[ ] 12.2 Subscription Authentication part One
-[ ] 12.3 Subscription Authentication part Two
-[ ] 12.4 PUB_SUB
-[ ] 12.5 Subscription Filter
-[ ] 12.6 Subscription Resolve
-[ ] 12.7 pendingOrders Subscription part One
-[ ] 12.8 pendingOrders Subscription part Two
-[ ] 12.9 cookedOrders
-[ ] 12.10 orderUpdates part One
-[ ] 12.11 orderUpdates part Two
-[ ] 12.12 takeOrder
+[x] 12.0 Subscriptions part One
+[x] 12.1 Subscriptions part Two
+[x] 12.2 Subscription Authentication part One
+[x] 12.3 Subscription Authentication part Two
+[x] 12.4 PUB_SUB
+[x] 12.5 Subscription Filter
+[x] 12.6 Subscription Resolve
+[x] 12.7 pendingOrders Subscription part One
+[x] 12.8 pendingOrders Subscription part Two
+[x] 12.9 cookedOrders
+[x] 12.10 orderUpdates part One
+[x] 12.11 orderUpdates part Two
+[x] 12.12 takeOrder
 
 13 PAYMENTS
-13.0 Payment Introduction
-13.1 Payment Module
-13.2 createPayment part One
-13.3 createPayment part Two
-13.4 getPayments Resolver
-13.5 Task Scheduling is Awesome
-13.6 Promoting Restaurants
-13.7 Promoting Restaurants part Two
-13.8 Backend Conclusions
+[] 13.0 Payment Introduction
+[] 13.1 Payment Module
+[] 13.2 createPayment part One
+[] 13.3 createPayment part Two
+[] 13.4 getPayments Resolver
+[] 13.5 Task Scheduling is Awesome
+[] 13.6 Promoting Restaurants
+[] 13.7 Promoting Restaurants part Two
+[] 13.8 Backend Conclusions
 
 
 

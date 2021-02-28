@@ -60,5 +60,9 @@ The Backend of Uber Eats Clone
 
 # Payments
 - Payments (CRON)
+  - CRON: chronological(시간순, 연대순)이라는 단어에서 유래
+  - cron jbo, crons job, time job은 서버에 5분마다 어떤 function을 실행시키도록 만들 수 있다.
+    도는 매주 월요일 7pm에 function을 실행시킬 수도 있다.
+  - 
 
 

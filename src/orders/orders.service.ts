@@ -15,6 +15,7 @@ import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { EditOrderInput, EditOrderOutput } from './dtos/edit-order.dto';
 import { GetOrderInput, GetOrderOutput } from './dtos/get-order.dto';
 import { GetOrdersInput, GetOrdersOutput } from './dtos/get-orders.dto';
+import { TakeOrderInput, TakeOrderOutput } from './dtos/take-order.dto';
 import { OrderItem } from './entities/order-item.entity';
 import { Order, OrderStatus } from './entities/order.entity';
 
@@ -128,6 +129,20 @@ export class OrderService {
     // console.log(order);
   }
 
+  canSeeOrder(user: User, order: Order): boolean {
+    let canSee = true;
+    if (user.role === UserRole.Client && order.customerId !== user.id) {
+      canSee = false;
+    }
+    if (user.role === UserRole.Delivery && order.driverId !== user.id) {
+      canSee = false;
+    }
+    if (user.role === UserRole.Owner && order.restaurant.ownerId !== user.id) {
+      canSee = false;
+    }
+    return canSee;
+  }
+
   async getOrders(
     user: User,
     { status }: GetOrdersInput,
@@ -169,6 +184,7 @@ export class OrderService {
         }
       }
 
+      console.log('### orders.service > getOrders > orders: ', orders);
       return {
         ok: true,
         orders,
@@ -179,20 +195,6 @@ export class OrderService {
         error: 'Could not get orders',
       };
     }
-  }
-
-  canSeeOrder(user: User, order: Order): boolean {
-    let canSee = true;
-    if (user.role === UserRole.Client && order.customerId !== user.id) {
-      canSee = false;
-    }
-    if (user.role === UserRole.Delivery && order.driverId !== user.id) {
-      canSee = false;
-    }
-    if (user.role === UserRole.Owner && order.restaurant.ownerId !== user.id) {
-      canSee = false;
-    }
-    return canSee;
   }
 
   async getOrder(
@@ -296,6 +298,50 @@ export class OrderService {
       return {
         ok: false,
         error: 'Could not edit order.',
+      };
+    }
+  }
+
+  async takeOrder(
+    driver: User,
+    { id: orderId }: TakeOrderInput,
+  ): Promise<TakeOrderOutput> {
+    try {
+      const order = await this.orders.findOne(orderId);
+      if (!order) {
+        return {
+          ok: false,
+          error: 'Order not found',
+        };
+      }
+
+      if (order.driver) {
+        return {
+          ok: false,
+          error: 'This order already has a driver',
+        };
+      }
+
+      await this.orders.save({
+        id: orderId,
+        driver,
+      });
+
+      await this.pubSub.publish(NEW_ORDER_UPDATE, {
+        orderUpdates: { ...order, driver },
+      });
+
+      return {
+        ok: true,
+      };
+
+      return {
+        ok: true,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not update order',
       };
     }
   }
