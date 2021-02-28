@@ -47,6 +47,7 @@ The Backend of Uber Eats Clone
     : orderUpdate event는 client와 owner가 listening을 하고 있을 것임
     : 그런데 orderUpdate evnet가 생기고 order status가 cooked이면 
   - Pending Pickup Order(Deleivery) (subscription: orderUpdate) (trigger: editOrder(orderUpdate))
+    : owner가 음식 준비 완료하고 픽업할 준비가 되면 trigger되는 subscription이다. 
     : delivery도 이 evnet를 listening할 것이고
     : 그러면 해당 order에 driver가 등록될거고 모두가 order status를 볼 수 있다.
     : customer는 order가 승인, 픽업, 요리, 배달되는 모든 과정을 볼 수 있다.

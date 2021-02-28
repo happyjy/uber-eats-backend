@@ -50,6 +50,7 @@ export class AuthGuard implements CanActivate {
         console.log('### AuthGuard decorator > canActivate > user: ', user);
         if (user) {
           gqlContext['user'] = user;
+          gqlContext['settingFromauthGuard'] = 'settingFromauthGuard';
           if (roles.includes('Any')) {
             console.log('### AuthGuard decorator > canActivate > user1: ');
             return true;

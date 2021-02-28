@@ -4,7 +4,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { number } from 'joi';
 import { AuthUser } from 'src/auth/auth-user.decorator';
 import { Role } from 'src/auth/role.decorator';
-import { PUB_SUB } from 'src/common/common.constants';
+import { PUB_SUB, NEW_PENDING_ORDER } from 'src/common/common.constants';
 import { User } from 'src/users/entities/user.entity';
 import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { EditOrderInput, EditOrderOutput } from './dtos/edit-order.dto';
@@ -77,5 +77,24 @@ export class OrderResolver {
   readyPotato(@Args('potatoId') potatoId: number, @AuthUser() user: User) {
     console.log(number, user);
     return this.pubSub.asyncIterator('hotPotatos');
+  }
+
+  @Subscription((returns) => Order, {
+    // order가 만들어진 restaurant이 context.User의 restaurant인지 체크
+    filter: ({ pendingOrders: { ownerId } }, _, { user }) => {
+      console.log('### pendingOrders: payload, _, context: ', {
+        ownerId,
+        _,
+        user,
+      });
+      return ownerId === user.id;
+    },
+    //Subscrioption설정에 return 값을 맞추기 위해서
+    //pendingOrders trigger 하는 곳에서 payload return value가 객체 이기 때문이다. (createOrder 확인해보자)
+    resolve: ({ pendingOrders: { order } }) => order,
+  })
+  @Role(['Owner'])
+  pendingOrders() {
+    return this.pubSub.asyncIterator(NEW_PENDING_ORDER);
   }
 }
