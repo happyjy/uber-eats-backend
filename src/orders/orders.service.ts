@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PubSub } from 'graphql-subscriptions';
 import {
   NEW_COOKED_ORDER,
+  NEW_ORDER_UPDATE,
   NEW_PENDING_ORDER,
   PUB_SUB,
 } from 'src/common/common.constants';
@@ -234,9 +235,12 @@ export class OrderService {
     { id: orderId, status }: EditOrderInput,
   ): Promise<EditOrderOutput> {
     try {
-      const order = await this.orders.findOne(orderId, {
-        relations: ['restaurant'],
-      });
+      // # order entity에 eager 설정을 해주면서 relations를 제거
+      // const order = await this.orders.findOne(orderId, {
+      //   relations: ['restaurant'],
+      // });
+      const order = await this.orders.findOne(orderId);
+
       if (!order) {
         return {
           ok: false,
@@ -276,13 +280,15 @@ export class OrderService {
         id: orderId,
         status,
       });
+      const newOrder = { ...order, status };
       if (user.role === UserRole.Owner) {
         if (status === OrderStatus.Cooked) {
           await this.pubSub.publish(NEW_COOKED_ORDER, {
-            cookedOrders: { ...order, status },
+            cookedOrders: newOrder,
           });
         }
       }
+      await this.pubSub.publish(NEW_ORDER_UPDATE, { orderUpdates: newOrder });
       return {
         ok: true,
       };

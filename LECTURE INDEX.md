@@ -161,7 +161,7 @@ LECTURE INDEX
 [ ] 12.8 pendingOrders Subscription part Two
 [ ] 12.9 cookedOrders
 [ ] 12.10 orderUpdates part One
-[ ] 12.11 orderUpdates
+[ ] 12.11 orderUpdates part Two
 [ ] 12.12 takeOrder
 
 13 PAYMENTS
@@ -175,6 +175,11 @@ LECTURE INDEX
 13.7 Promoting Restaurants part Two
 13.8 Backend Conclusions
 
+
+
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 14 FRONTEND SETUP
 14.0 Create React App
 14.1 TailwindCSS part One

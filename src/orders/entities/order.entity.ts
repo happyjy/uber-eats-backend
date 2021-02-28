@@ -37,6 +37,7 @@ export class Order extends CoreEntity {
   @ManyToOne((type) => User, (user) => user.orders, {
     onDelete: 'SET NULL',
     nullable: true,
+    eager: true,
   })
   customer?: User;
 
@@ -47,6 +48,7 @@ export class Order extends CoreEntity {
   @ManyToOne((type) => User, (user) => user.rides, {
     onDelete: 'SET NULL',
     nullable: true,
+    eager: true,
   })
   driver?: User;
 
@@ -57,12 +59,13 @@ export class Order extends CoreEntity {
   @ManyToOne((type) => Restaurant, (restaurant) => restaurant.orders, {
     onDelete: 'SET NULL',
     nullable: true,
+    eager: true,
   })
   restaurant?: Restaurant;
   // @ManyToOne 2번째 파라미터는 optional이며 relation entity에 접근 해주고 싶을때만 설정
 
   @Field((type) => [OrderItem])
-  @ManyToMany((type) => OrderItem)
+  @ManyToMany((type) => OrderItem, { eager: true })
   @JoinTable()
   items: OrderItem[];
 
