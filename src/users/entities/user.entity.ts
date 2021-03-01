@@ -60,7 +60,7 @@ export class User extends CoreEntity {
   rides: Order[];
 
   @Field((type) => [Payment])
-  @OneToMany((type) => Payment, (payment) => payment.user)
+  @OneToMany((type) => Payment, (payment) => payment.user, { eager: true })
   payments: Payment[];
 
   // DB insert, update시 먼저 수행되는 함수
