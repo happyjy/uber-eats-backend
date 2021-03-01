@@ -20,6 +20,7 @@ export class PaymentResolver {
     @AuthUser() owner: User,
     @Args('input') createPaymenstInput: CreatePaymentInput,
   ): Promise<CreatePaymentOutput> {
+    console.log('### this.paymentService: ', this.paymentService);
     return this.paymentService.createPayment(owner, createPaymenstInput);
   }
 

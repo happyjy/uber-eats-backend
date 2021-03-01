@@ -27,6 +27,7 @@ import { OrderItem } from './orders/entities/order-item.entity';
 import { CommonModule } from './common/common.module';
 import { PaymentsModule } from './payments/payments.module';
 import { Payment } from './payments/entities/payment.entity';
+import { ScheduleModule } from '@nestjs/schedule';
 
 console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -90,6 +91,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
       },
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // schema file 생성
     }),
+    ScheduleModule.forRoot(),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
       test: 'abc',
