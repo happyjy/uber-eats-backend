@@ -26,6 +26,7 @@ import { OrdersModule } from './orders/orders.module';
 import { OrderItem } from './orders/entities/order-item.entity';
 import { CommonModule } from './common/common.module';
 import { PaymentsModule } from './payments/payments.module';
+import { Payment } from './payments/entities/payment.entity';
 
 console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -67,6 +68,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
         Dish,
         Order,
         OrderItem,
+        Payment,
       ], // table 생성 설정
       // entities: ['src/entity/**/*.ts'],
       // migrations: ['src/migration/**/*.ts'],

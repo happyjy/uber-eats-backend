@@ -4,7 +4,7 @@ import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne, RelationId } from 'typeorm';
 
-@InputType('RestaurantInputType', { isAbstract: true })
+@InputType('PaymentInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class Payment extends CoreEntity {
@@ -23,6 +23,7 @@ export class Payment extends CoreEntity {
   @ManyToOne((type) => Restaurant)
   restaurant: Restaurant;
 
+  @Field((type) => Int)
   @RelationId((payments: Payment) => payments.restaurant)
   restaurantId: number;
 }
