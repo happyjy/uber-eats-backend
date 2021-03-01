@@ -25,6 +25,7 @@ import { Order } from './orders/entities/order.entity';
 import { OrdersModule } from './orders/orders.module';
 import { OrderItem } from './orders/entities/order-item.entity';
 import { CommonModule } from './common/common.module';
+import { PaymentsModule } from './payments/payments.module';
 
 console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -101,6 +102,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
     UsersModule,
     OrdersModule,
     CommonModule,
+    PaymentsModule,
     // CommonModule,
   ],
   controllers: [],

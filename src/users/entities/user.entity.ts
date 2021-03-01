@@ -11,6 +11,7 @@ import * as bcrypt from 'bcrypt';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { Order } from 'src/orders/entities/order.entity';
+import { Payment } from 'src/payments/entities/payments.entity';
 
 export enum UserRole {
   Client = 'Client',
@@ -57,6 +58,10 @@ export class User extends CoreEntity {
   @Field((type) => [Order])
   @OneToMany((type) => Order, (order) => order.driver)
   rides: Order[];
+
+  @Field((type) => [Payment])
+  @OneToMany((type) => Payment, (payments) => payments.user)
+  payments: Payment[];
 
   // DB insert, update시 먼저 수행되는 함수
   @BeforeInsert()
