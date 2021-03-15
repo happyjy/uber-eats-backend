@@ -2,6 +2,11 @@
 
 The Backend of Uber Eats Clone
 
+## setting
+* npm i 
+* localhost:4000/graphql
+
+
 ## User Model:
 - id
 - createdAt

@@ -165,15 +165,15 @@ LECTURE INDEX
 [x] 12.12 takeOrder
 
 13 PAYMENTS
-[] 13.0 Payment Introduction
-[] 13.1 Payment Module
-[] 13.2 createPayment part One
-[] 13.3 createPayment part Two
-[] 13.4 getPayments Resolver
-[] 13.5 Task Scheduling is Awesome
-[] 13.6 Promoting Restaurants
-[] 13.7 Promoting Restaurants part Two
-[] 13.8 Backend Conclusions
+[x] 13.0 Payment Introduction
+[x] 13.1 Payment Module
+[x] 13.2 createPayment part One
+[x] 13.3 createPayment part Two
+[x] 13.4 getPayments Resolver
+[x] 13.5 Task Scheduling is Awesome
+[x] 13.6 Promoting Restaurants part One
+[x] 13.7 Promoting Restaurants part Two
+[x] 13.8 Backend Conclusions
 
 
 
@@ -181,11 +181,11 @@ LECTURE INDEX
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
 14 FRONTEND SETUP
-14.0 Create React App
-14.1 TailwindCSS part One
-14.2 TailwindCSS part Two
-14.3 Apollo Setup
-14.4 React Router Dom
+[]14.0 Create React App
+[]14.1 TailwindCSS part One
+[]14.2 TailwindCSS part Two
+[]14.3 Apollo Setup
+[]14.4 React Router Dom
 
 15 AUTHENTICATION
 15.0 Local Only Fields
