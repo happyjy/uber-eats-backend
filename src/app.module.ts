@@ -28,6 +28,7 @@ import { CommonModule } from './common/common.module';
 import { PaymentsModule } from './payments/payments.module';
 import { Payment } from './payments/entities/payment.entity';
 import { ScheduleModule } from '@nestjs/schedule';
+import { UploadsModule } from './uploads/uploads.module';
 
 console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 @Module({
@@ -107,6 +108,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
     OrdersModule,
     CommonModule,
     PaymentsModule,
+    UploadsModule,
     // CommonModule,
   ],
   controllers: [],
