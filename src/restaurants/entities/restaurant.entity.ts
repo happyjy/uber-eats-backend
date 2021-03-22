@@ -31,13 +31,13 @@ export class Restaurant extends CoreEntity {
   @Length(5)
   name: string;
 
-  @Field((type) => String, { nullable: true })
-  @Column({ nullable: true })
+  @Field((type) => String)
+  @Column()
   @IsString()
   coverImg: string;
 
   @Field((type) => String)
-  @Column({ nullable: true })
+  @Column()
   @IsString()
   address: string;
 
@@ -45,6 +45,7 @@ export class Restaurant extends CoreEntity {
   @ManyToOne((type) => Category, (category) => category.restaurants, {
     nullable: true,
     onDelete: 'SET NULL',
+    eager: true,
   })
   category: Category;
 

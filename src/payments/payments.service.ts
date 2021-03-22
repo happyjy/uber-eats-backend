@@ -74,36 +74,36 @@ export class PaymentService {
     }
   }
 
-  @Interval(2000)
-  async checkPromotedRestaurants() {
-    const restaurants = await this.restaurants.find({
-      isPromoted: true,
-      promotedUntil: LessThan(new Date()),
-    });
-    console.log(restaurants);
-    restaurants.forEach(async (restaurant) => {
-      restaurant.isPromoted = false;
-      restaurant.promotedUntil = null;
-      await this.restaurants.save(restaurant);
-    });
-  }
+  // @Interval(2000)
+  // async checkPromotedRestaurants() {
+  //   const restaurants = await this.restaurants.find({
+  //     isPromoted: true,
+  //     promotedUntil: LessThan(new Date()),
+  //   });
+  //   console.log('### checkPromotedRestaurants > restaurants: ', restaurants);
+  //   restaurants.forEach(async (restaurant) => {
+  //     restaurant.isPromoted = false;
+  //     restaurant.promotedUntil = null;
+  //     await this.restaurants.save(restaurant);
+  //   });
+  // }
 
-  @Cron('30 * * * * *', {
-    name: 'myJob',
-  })
-  checkForPayments() {
-    console.log('Checking for payments....(cron)');
-    const job = this.schedulerRegistry.getCronJob('myJob');
-    job.stop();
-  }
+  // @Cron('30 * * * * *', {
+  //   name: 'myJob',
+  // })
+  // checkForPayments() {
+  //   console.log('### checkForPayments > Checking for payments....(cron)');
+  //   const job = this.schedulerRegistry.getCronJob('myJob');
+  //   job.stop();
+  // }
 
-  @Interval(5000)
-  checkForPaymentsI() {
-    console.log('Checking for payments....(interval)');
-  }
+  // @Interval(5000)
+  // checkForPaymentsI() {
+  //   console.log('Checking for payments....(interval)');
+  // }
 
-  @Timeout(20000)
-  afterStarts() {
-    console.log('Congrats!');
-  }
+  // @Timeout(20000)
+  // afterStarts() {
+  //   console.log('Congrats!');
+  // }
 }

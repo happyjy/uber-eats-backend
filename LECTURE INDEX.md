@@ -171,6 +171,7 @@ LECTURE INDEX
 [x] 13.3 createPayment part Two
 [x] 13.4 getPayments Resolver
 [x] 13.5 Task Scheduling is Awesome
+  ㄴ cron
 [x] 13.6 Promoting Restaurants part One
 [x] 13.7 Promoting Restaurants part Two
 [x] 13.8 Backend Conclusions
