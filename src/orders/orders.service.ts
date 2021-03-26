@@ -37,6 +37,8 @@ export class OrderService {
     customer: User,
     { restaurantId, items }: CreateOrderInput,
   ): Promise<CreateOrderOutput> {
+    // 메뉴 = dish = item
+    // 메뉴 옵션 = options
     try {
       const restaurant = await this.restaurants.findOne(restaurantId);
       if (!restaurant) {
@@ -48,6 +50,7 @@ export class OrderService {
       console.log('### restaurant: ', restaurant);
       console.log('### items: ', items);
 
+      // 가격 계산(메뉴 + 메뉴 옵션)
       let orderFinalPrice = 0;
       const orderItems: OrderItem[] = [];
       for (const item of items) {
@@ -112,6 +115,7 @@ export class OrderService {
 
       return {
         ok: true,
+        orderId: restaurant.ownerId,
       };
     } catch (error) {
       return {

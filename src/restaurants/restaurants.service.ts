@@ -75,6 +75,7 @@ export class RestaurantService {
       await this.restaurants.save(newRestaurant);
       return {
         ok: true,
+        restaurantId: newRestaurant.id,
       };
     } catch {
       return {
@@ -85,6 +86,8 @@ export class RestaurantService {
   }
 
   async myRestaurants(owner: User): Promise<MyRestaurantsOutput> {
+    console.log('### MyRestaurants: ');
+
     try {
       const restaurants = await this.restaurants.find({ owner });
       return {
@@ -102,6 +105,8 @@ export class RestaurantService {
     owner: User,
     { id }: MyRestaurantInput,
   ): Promise<MyRestaurantOutput> {
+    console.log('### MyRestaurant: ', id);
+
     try {
       const restaurant = await this.restaurants.findOne(
         { owner, id },
