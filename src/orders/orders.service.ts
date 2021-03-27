@@ -109,6 +109,7 @@ export class OrderService {
         }),
       );
 
+      // subscription 관련 로직 처리
       await this.pubSub.publish(NEW_PENDING_ORDER, {
         pendingOrders: { order, ownerId: restaurant.ownerId },
       });

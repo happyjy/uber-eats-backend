@@ -87,6 +87,8 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
         // );
         const TOKEN_KEY = 'x-jwt';
         return {
+          // query를 이용해 연결할 때는 req headers를 사용
+          // subscription을 이용해 연결할 때는 connection context를 사용
           token: req ? req.headers['x-jwt'] : connection.context['X-JWT'],
         };
       },
