@@ -116,7 +116,7 @@ export class OrderService {
 
       return {
         ok: true,
-        orderId: restaurant.ownerId,
+        orderId: order.id,
       };
     } catch (error) {
       return {
