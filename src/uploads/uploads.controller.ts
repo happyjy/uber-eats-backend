@@ -4,12 +4,15 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as AWS from 'aws-sdk';
 
 const BUCKET_NAME = 'happyjyubereatsclone';
 @Controller('uploads')
 export class UploadsController {
+  constructor(private readonly configService: ConfigService) {}
+
   @Post('')
   @UseInterceptors(FileInterceptor('file'))
   // uploadFile(@UploadedFile() file: Express.Multer.File) {
@@ -20,8 +23,10 @@ export class UploadsController {
 
     AWS.config.update({
       credentials: {
-        accessKeyId: process.env.accessKeyId,
-        secretAccessKey: process.env.secretAccessKey,
+        // accessKeyId: process.env.accessKeyId,
+        // secretAccessKey: process.env.secretAccessKey,
+        accessKeyId: this.configService.get('AWS_KEY'),
+        secretAccessKey: this.configService.get('AWS_SECRET'),
       },
     });
     try {
