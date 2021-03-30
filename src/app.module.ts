@@ -64,6 +64,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
       synchronize: process.env.NODE_ENV !== 'prod',
       logging:
         process.env.NODE_ENV !== 'prod' && process.env.NODE_ENV !== 'test',
+      ssl: false,
       entities: [
         User,
         Verification,
