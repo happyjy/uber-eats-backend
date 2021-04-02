@@ -87,6 +87,7 @@ console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
       // subscribers: ['src/subscriber/**/*.ts'],
     }),
     // GrpahQL 관련 설정
+    // GraphQlModule 구현 코드 github: https://github.com/nestjs/graphql/blob/master/lib/graphql.module.ts
     GraphQLModule.forRoot({
       playground: process.env.NODE_ENV !== 'production',
       installSubscriptionHandlers: true,
