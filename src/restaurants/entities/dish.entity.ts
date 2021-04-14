@@ -17,6 +17,9 @@ export class DishChoice {
 @InputType('DishOptionInputType', { isAbstract: true })
 @ObjectType()
 export class DishOption {
+  @Field((type) => Number)
+  id: number;
+
   @Field((type) => String)
   name: string;
 
