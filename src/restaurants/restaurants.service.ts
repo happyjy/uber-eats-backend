@@ -1,4 +1,4 @@
-import { Raw, Repository } from 'typeorm';
+import { Connection, getRepository, Raw, Repository } from 'typeorm';
 import { Injectable, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant.entity';
@@ -103,15 +103,41 @@ export class RestaurantService {
 
   async myRestaurant(
     owner: User,
-    { id }: MyRestaurantInput,
+    { id, hiddenType }: MyRestaurantInput,
   ): Promise<MyRestaurantOutput> {
-    console.log('### MyRestaurant: ', id);
+    // console.log('### MyRestaurant > owner: ', owner);
+    console.log('### MyRestaurant > restaurant id: ', id);
+    console.log('### MyRestaurant > hiddenType: ', hiddenType);
 
+    // const makers = await getRepository(Restaurant)
+    //   .createQueryBuilder('restaurant')
+    //   .innerJoinAndSelect('restaurant.menu', 'menu', 'menu.name = :name', {
+    //     name: true,
+    //   })
+    //   .orderBy('menu', 'DESC')
+    //   .getMany();
+
+    // console.log('### makers: ', makers);
     try {
-      const restaurant = await this.restaurants.findOne(
+      // const restaurant = await this.restaurants.findOne({
+      //   join: { alias: 'menu', innerJoin: { menu: 'restaurant.menu' } },
+      //   where: (qb) => {
+      //     qb.where({
+      //       // a: 1,
+      //     }).andWhere('restaurant.id = :id', { id });
+      //   },
+      // });
+      let restaurant = await this.restaurants.findOne(
         { owner, id },
         { relations: ['menu', 'orders'] },
       );
+
+      if (hiddenType != 2) {
+        restaurant.menu = restaurant.menu.filter((m) => {
+          return m.hidden === (hiddenType === 0 ? false : true);
+        });
+      }
+
       return {
         restaurant,
         ok: true,
