@@ -15,6 +15,7 @@ export class EditDishInput extends PickType(PartialType(Dish), [
   'price',
   'description',
   'options',
+  'hidden',
 ]) {
   @Field((type) => Int)
   dishId: number;

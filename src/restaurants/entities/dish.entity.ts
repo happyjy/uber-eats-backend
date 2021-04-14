@@ -1,7 +1,7 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsNumber, IsString, Length } from 'class-validator';
-import { CoreEntity } from 'src/common/entities/core.entity';
+import { IsBoolean, IsNumber, IsString, Length } from 'class-validator';
 import { Column, Entity, ManyToOne, RelationId } from 'typeorm';
+import { CoreEntity } from 'src/common/entities/core.entity';
 import { Restaurant } from './restaurant.entity';
 
 @InputType('DishChoiceInputType', { isAbstract: true })
@@ -67,4 +67,9 @@ export class Dish extends CoreEntity {
   @Field((type) => [DishOption], { nullable: true })
   @Column({ type: 'json', nullable: true })
   options?: DishOption[];
+
+  @Field((type) => Boolean, { defaultValue: false })
+  @Column()
+  @IsBoolean()
+  hidden: Boolean;
 }

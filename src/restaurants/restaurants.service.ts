@@ -20,7 +20,6 @@ import {
 } from './dtos/delete-restaurant.dto';
 import { AllCategoriesOutput } from './dtos/all-categories.dto';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
-import { Args } from '@nestjs/graphql';
 import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 import { RestaurantInput, RestaurantOutput } from './dtos/restaurant.dto';
 import {
@@ -101,6 +100,7 @@ export class RestaurantService {
       };
     }
   }
+
   async myRestaurant(
     owner: User,
     { id }: MyRestaurantInput,
