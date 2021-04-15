@@ -103,12 +103,8 @@ export class RestaurantService {
 
   async myRestaurant(
     owner: User,
-    { id, hiddenType }: MyRestaurantInput,
+    { id, hiddenType, orderType }: MyRestaurantInput,
   ): Promise<MyRestaurantOutput> {
-    // console.log('### MyRestaurant > owner: ', owner);
-    console.log('### MyRestaurant > restaurant id: ', id);
-    console.log('### MyRestaurant > hiddenType: ', hiddenType);
-
     // const makers = await getRepository(Restaurant)
     //   .createQueryBuilder('restaurant')
     //   .innerJoinAndSelect('restaurant.menu', 'menu', 'menu.name = :name', {
@@ -135,6 +131,16 @@ export class RestaurantService {
       if (hiddenType != 2) {
         restaurant.menu = restaurant.menu.filter((m) => {
           return m.hidden === (hiddenType === 0 ? false : true);
+        });
+      }
+
+      if (orderType) {
+        restaurant.menu = restaurant.menu.sort((a, b) => {
+          if (orderType === 'DESC') {
+            return +b.order - +a.order;
+          } else if (orderType === 'ASC') {
+            return +a.order - +b.order;
+          }
         });
       }
 

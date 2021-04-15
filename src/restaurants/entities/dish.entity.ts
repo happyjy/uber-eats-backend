@@ -73,8 +73,8 @@ export class Dish extends CoreEntity {
   @IsBoolean()
   hidden: Boolean;
 
-  // @Field((type) => Boolean, { defaultValue: false })
-  // @Column()
-  // @IsNumber()
-  // order: Boolean;
+  @Field((type) => Int, { nullable: true })
+  @Column({ nullable: true })
+  @IsNumber()
+  order: Number;
 }
